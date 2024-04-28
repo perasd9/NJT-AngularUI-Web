@@ -1,0 +1,36 @@
+@use "../../../../styles.scss" as style;
+
+.top-calendar {
+  height: 150px;
+  width: calc(100% - 115px);
+  margin-left: 115px;
+  background-color: style.$colorYellow;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+
+  .dates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80%;
+    gap: 3rem;
+    overflow: hidden;
+    h2 {
+      min-width: 75px;
+      font-family: style.$josephin500;
+      color: style.$colorBlue;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+
+  .selected {
+    background-color: style.$colorPurple;
+    padding: 30px 5px;
+    border-radius: 40px;
+  }
+}

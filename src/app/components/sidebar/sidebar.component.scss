@@ -1,0 +1,56 @@
+@use "../../../styles.scss" as style;
+
+.sidebar {
+  width: 115px;
+  height: 100%;
+  position: absolute;
+  background-color: style.$colorBlue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0 1.5rem 0;
+
+  img {
+    cursor: pointer;
+  }
+
+  .first-group-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .second-group-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+.tool-tip {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .tool-tip-text {
+    visibility: hidden;
+    width: 110px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    transform: translateX(90px);
+    font-family: style.$josephin500;
+
+    transition: all 0.3s;
+  }
+}
+
+.tool-tip:hover .tool-tip-text {
+  transform: translateX(120px);
+  visibility: visible;
+}

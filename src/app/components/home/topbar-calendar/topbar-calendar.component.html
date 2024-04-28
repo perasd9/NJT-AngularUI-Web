@@ -1,0 +1,29 @@
+<div class="top-calendar">
+  <img
+    src="./assets/arrowLeft.png"
+    alt=""
+    style="cursor: pointer; object-fit: contain"
+    (click)="scrollLeft()"
+  />
+  <div class="dates" #datesContainer>
+    <h2
+      *ngFor="let item of dates; index as i"
+      style="cursor: pointer"
+      (click)="selectedDate = i"
+      [class.selected]="selectedDate === i"
+    >
+      {{ item.toString().split(" ")[0].toUpperCase() }} <br />
+      {{ item.getDate() }}
+    </h2>
+  </div>
+
+  <img
+    src="./assets/arrowRight.png"
+    alt=""
+    style="cursor: pointer; object-fit: contain"
+    (click)="scrollRight()"
+  />
+  <div class="choose-date">
+    <img src="./assets/choseDateIcon.png" alt="" style="cursor: pointer" />
+  </div>
+</div>
