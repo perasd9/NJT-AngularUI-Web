@@ -1,0 +1,41 @@
+<div class="hall-card">
+  <div class="hall-card-header" style="color: #fff; font-size: 21px">
+    <h2>{{ hall.naziv }}</h2>
+  </div>
+  <div class="hall-card-content">
+    <h3>
+      Tip sale :
+      <span style="font-style: italic; font-weight: 500; color: #ffcd67">{{
+        hall.tipSale?.naziv
+      }}</span>
+    </h3>
+    <h3>
+      Napomena :
+      <span style="font-style: italic; font-weight: 500; color: #ffcd67">{{
+        hall.napomena
+      }}</span>
+    </h3>
+    <h3>
+      Broj mesta :
+      <span style="font-style: italic; font-weight: 500; color: #ffcd67">{{
+        hall.brojMesta
+      }}</span>
+    </h3>
+    <h3 ngIf="hall.brojRacunara != null">
+      Broj racunara :
+      <span style="font-style: italic; font-weight: 500; color: #ffcd67">{{
+        hall.brojRacunara
+      }}</span>
+    </h3>
+    <h3>
+      Status :
+      <span style="font-style: italic; font-weight: 500; color: #ffcd67">{{
+        hall.status?.status
+      }}</span>
+    </h3>
+  </div>
+  <div class="hall-card-group-buttons">
+    <button class="button">Izmeni</button>
+    <button class="button">Obrisi</button>
+  </div>
+</div>

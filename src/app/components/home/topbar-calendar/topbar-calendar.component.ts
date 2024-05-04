@@ -27,7 +27,7 @@ export class TopbarCalendarComponent implements OnInit {
   ngOnInit(): void {
     for (let i = 1; i <= this.lastDate.getDate(); i++) {
       this.dates.push(
-        new Date(new Date().getFullYear(), new Date().getMonth() + 1, i)
+        new Date(new Date().getFullYear(), new Date().getMonth(), i)
       );
     }
   }
@@ -37,7 +37,6 @@ export class TopbarCalendarComponent implements OnInit {
       left: this.datesContainer.nativeElement.scrollLeft + 400,
       behavior: 'smooth',
     });
-    console.log('PERA');
   }
 
   scrollLeft(): void {

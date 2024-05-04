@@ -1,0 +1,8 @@
+.hall-cards {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}

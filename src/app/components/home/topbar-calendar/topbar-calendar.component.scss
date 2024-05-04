@@ -2,8 +2,7 @@
 
 .top-calendar {
   height: 150px;
-  width: calc(100% - 115px);
-  margin-left: 115px;
+  width: 100%;
   background-color: style.$colorYellow;
   border-radius: 0 0 20px 20px;
   display: flex;
@@ -16,14 +15,14 @@
     justify-content: space-between;
     align-items: center;
     max-width: 80%;
+    min-width: 40%;
     gap: 3rem;
     overflow: hidden;
     h2 {
       min-width: 75px;
-      font-family: style.$josephin500;
       color: style.$colorBlue;
       font-size: 1.5rem;
-      font-weight: 600;
+      font-weight: 900;
       text-align: center;
     }
   }

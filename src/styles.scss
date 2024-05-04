@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap");
 
 $colorPurple: #ce589f;
 $colorBlue: #004a7c;
 $colorYellow: #ffcd67;
 
-$josephin500: "Josephin Slab", sans-serif;
+$josephin500: "Josefin Slab", serif;
 
 * {
   margin: 0;
@@ -14,7 +13,7 @@ $josephin500: "Josephin Slab", sans-serif;
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Josefin Slab", serif;
 }
 html {
   background-color: #dddedd;
@@ -23,4 +22,16 @@ html {
 .background-top {
   height: 150px;
   background-color: $colorPurple;
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: $colorYellow;
+  color: $colorBlue;
+  border: none;
+  cursor: pointer;
 }
