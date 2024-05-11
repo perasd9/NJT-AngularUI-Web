@@ -1,9 +1,9 @@
 export class HallType {
-  tipSaleId: number;
+  id: number;
   naziv: string;
 
-  constructor(tipSaleId: number, naziv: string) {
-    this.tipSaleId = tipSaleId;
+  constructor(id: number, naziv: string) {
+    this.id = id;
     this.naziv = naziv;
   }
 }

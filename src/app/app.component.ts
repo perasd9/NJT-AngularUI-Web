@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { TopbarCalendarComponent } from './components/home/topbar-calendar/topbar-calendar.component';
 import { HomeComponent } from './components/home/home.component';
 import { HallsComponent } from './components/halls/halls.component';
 

@@ -1,8 +1,23 @@
+@use "../../../styles.scss" as style;
+
 .hall-cards {
   height: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 70px;
+  right: 80px;
+  width: 100px;
+  height: 70px;
+  border-radius: 50px;
+  background-color: style.$colorBlue;
+  color: style.$colorYellow;
+  border: 2px solid style.$colorYellow;
 }

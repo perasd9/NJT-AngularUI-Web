@@ -9,30 +9,63 @@
   <div class="add-sala-form">
     <div class="add-sala-form-group">
       <label for="nazivSale">Naziv sale</label>
-      <input type="text" name="nazivSale" />
+      <input type="text" name="nazivSale" [(ngModel)]="hall.naziv" />
     </div>
     <div class="add-sala-form-group">
       <label for="napomena">Napomena</label>
-      <input type="text" name="napomena" />
+      <input type="text" name="napomena" [(ngModel)]="hall.napomena" />
     </div>
     <div class="add-sala-form-group select">
       <label for="tipSale">Tip sale</label>
-      <select name="tipSale"></select>
+      <select name="tipSale" [(ngModel)]="hall.tipSale">
+        <option
+          *ngFor="let item of hallTypes; index as i"
+          [ngValue]="item"
+          [selected]="item.id === selectedHallTypeOption.id"
+        >
+          {{ item.naziv }}
+        </option>
+      </select>
     </div>
     <div class="add-sala-form-group">
       <label for="brojMesta">Broj mesta</label>
-      <input type="text" name="brojMesta" />
+      <input type="number" name="brojMesta" [(ngModel)]="hall.brojMesta" />
     </div>
     <div class="add-sala-form-group">
-      <label for="brojRacunara">Broj racuanra</label>
-      <input type="text" name="brojRacunara" />
+      <label for="brojRacunara">Broj racunara</label>
+      <input
+        type="number"
+        name="brojRacunara"
+        [(ngModel)]="hall.brojRacunara"
+      />
     </div>
     <div class="add-sala-form-group">
       <label for="status">Status</label>
-      <select name="status"></select>
+      <select name="status" [(ngModel)]="hall.statusSale">
+        <option
+          *ngFor="let item of hallStatuses; index as i"
+          [ngValue]="item"
+          [selected]="item.id === selectedHallStatusOption.id"
+        >
+          {{ item.status }}
+        </option>
+      </select>
     </div>
     <div class="add-sala-group-button">
-      <button class="button btnAdd">Dodaj</button>
+      <button
+        class="button btnAdd"
+        (click)="handleAddHall()"
+        *ngIf="isFormUpdate == false"
+      >
+        Dodaj
+      </button>
+      <button
+        class="button btnAdd"
+        (click)="handleUpdateHall()"
+        *ngIf="isFormUpdate == true"
+      >
+        Izmeni
+      </button>
     </div>
   </div>
 </div>

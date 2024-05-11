@@ -7,8 +7,8 @@ export class Hall {
   brojMesta: number;
   napomena: string;
   brojRacunara?: number;
-  statusId?: number;
-  status?: HallStatus;
+  statusSaleId?: number;
+  statusSale?: HallStatus;
   tipSaleId?: number;
   tipSale?: HallType;
 
@@ -18,8 +18,8 @@ export class Hall {
     brojMesta: number,
     napomena: string,
     brojRacunara?: number,
-    statusId?: number,
-    status?: HallStatus,
+    statusSaleId?: number,
+    statusSale?: HallStatus,
     tipSaleId?: number,
     tipSale?: HallType
   ) {
@@ -28,8 +28,8 @@ export class Hall {
     this.napomena = napomena;
     this.brojMesta = brojMesta;
     this.brojRacunara = brojRacunara;
-    this.statusId = statusId;
-    this.status = status;
+    this.statusSaleId = statusSaleId;
+    this.statusSale = statusSale;
     this.tipSale = tipSale;
     this.tipSaleId = tipSaleId;
   }

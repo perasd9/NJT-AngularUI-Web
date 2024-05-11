@@ -1,9 +1,9 @@
 export class HallStatus {
-  statusId: number;
+  id: number;
   status: string;
 
-  constructor(statusId: number, status: string) {
-    this.statusId = statusId;
+  constructor(id: number, status: string) {
+    this.id = id;
     this.status = status;
   }
 }

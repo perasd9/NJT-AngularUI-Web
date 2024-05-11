@@ -1,5 +1,21 @@
 <div class="hall-cards">
-  <div *ngFor="let item of halls">
-    <app-hall-card [hall]="item" />
-  </div>
+  <app-hall-card *ngFor="let item of halls" [hall]="item" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card [hall]="halls[0]" />
 </div>
+
+<button
+  class="button fixed-button"
+  routerLink="/add-hall"
+  [state]="{ isFormUpdate: false }"
+>
+  Dodaj
+</button>
