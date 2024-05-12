@@ -1,21 +1,9 @@
 <div class="hall-cards">
-  <app-hall-card *ngFor="let item of halls" [hall]="item" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
-  <app-hall-card [hall]="halls[0]" />
+  <app-hall-card
+    *ngFor="let item of halls"
+    [hall]="item"
+    (hallDeleted)="onHallUpdated($event)"
+  />
 </div>
 
-<button
-  class="button fixed-button"
-  routerLink="/add-hall"
-  [state]="{ isFormUpdate: false }"
->
-  Dodaj
-</button>
+<button class="button fixed-button" (click)="navigateToAddHall()">Dodaj</button>

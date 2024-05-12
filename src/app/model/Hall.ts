@@ -2,7 +2,7 @@ import { HallStatus } from './HallStatus';
 import { HallType } from './HallType';
 
 export class Hall {
-  salaId: number;
+  id: number;
   naziv: string;
   brojMesta: number;
   napomena: string;
@@ -13,7 +13,7 @@ export class Hall {
   tipSale?: HallType;
 
   constructor(
-    salaId: number,
+    id: number,
     naziv: string,
     brojMesta: number,
     napomena: string,
@@ -23,7 +23,7 @@ export class Hall {
     tipSaleId?: number,
     tipSale?: HallType
   ) {
-    this.salaId = salaId;
+    this.id = id;
     this.naziv = naziv;
     this.napomena = napomena;
     this.brojMesta = brojMesta;

@@ -10,8 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HallType } from '../../../model/HallType';
 import { HallStatus } from '../../../model/HallStatus';
 import { HallService } from '../services/hall.service';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { CommonModule, LocationStrategy } from '@angular/common';
+import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-hall',
@@ -21,45 +22,103 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-hall.component.scss',
 })
 export class AddHallComponent implements OnInit {
-  @Input({ required: true })
-  isFormUpdate: boolean = true;
-
-  @Input({ required: false })
-  hall: Hall = new Hall(0, '', 0, '', 0, 0, undefined, 0, undefined);
-
   hallTypes: HallType[] = [];
   hallStatuses: HallStatus[] = [];
-  selectedHallTypeOption: HallType = new HallType(0, '');
-  selectedHallStatusOption: HallStatus = new HallStatus(0, '');
+
+  @Input({ required: true })
+  isFormUpdate: boolean = false;
+
+  @Input({ required: false })
+  hall: Hall = new Hall(
+    0,
+    '',
+    0,
+    '',
+    0,
+    0,
+    this.hallStatuses[0],
+    0,
+    this.hallTypes[0]
+  );
 
   constructor(
     private hallService: HallService,
-    private route: ActivatedRoute
+    private loction: LocationStrategy,
+    private toast: NgToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.isFormUpdate = JSON.parse(params.get('isFormUpdate')!);
-      console.log(params);
+    const state = this.loction.getState() as {
+      isFormUpdate: boolean;
+      hall?: Hall;
+    };
+    this.hallService.getHallStatuses().subscribe((res) => {
+      this.hallStatuses = res.body;
+
+      state.hall == undefined
+        ? (this.hall.statusSale = this.hallStatuses[0])
+        : (this.hall.statusSale = this.hallStatuses.find(
+            (stat) => stat.id === state.hall!.statusSale?.id
+          ));
     });
-    if (this.hall.salaId == 0) {
-      this.hallService.getHallStatuses().subscribe((res) => {
-        this.hallStatuses = res;
-        this.selectedHallStatusOption =
-          this.hallStatuses[this.hallStatuses.length - 1];
-        this.hall.statusSale = this.hallStatuses[this.hallStatuses.length - 1];
-      });
-      this.hallService.getHallTypes().subscribe((res) => {
-        this.hallTypes = res;
-        this.selectedHallTypeOption = this.hallTypes[this.hallTypes.length - 1];
-        this.hall.tipSale = this.hallTypes[this.hallTypes.length - 1];
-      });
-    } else {
-    }
+
+    this.hallService.getHallTypes().subscribe((res) => {
+      this.hallTypes = res.body;
+
+      state.hall == undefined
+        ? (this.hall.tipSale = this.hallTypes[0])
+        : (this.hall.tipSale = this.hallTypes.find(
+            (type) => type.id === state.hall!.tipSale?.id
+          ));
+    });
+
+    this.isFormUpdate = state.isFormUpdate;
+    if (state.hall != undefined) this.hall = state.hall!;
   }
 
   handleAddHall() {
-    console.log(this.hall);
+    this.hallService.addHall(this.hall).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.router.navigate(['/halls']);
+
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Sala je uspesno kreirana!',
+            duration: 3000,
+          });
+        }
+      },
+      (err) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: 'Sala ne moze biti dodata!' + err,
+          duration: 3000,
+        });
+      }
+    );
   }
-  handleUpdateHall() {}
+  handleUpdateHall() {
+    this.hallService.updateHall(this.hall).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.router.navigate(['/halls']);
+
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Sala je uspesno izmenjena!',
+            duration: 3000,
+          });
+        }
+      },
+      (err) => {
+        this.toast.error({
+          detail: 'Error',
+          summary: 'Sala ne moze biti izmenjena!' + err,
+          duration: 3000,
+        });
+      }
+    );
+  }
 }

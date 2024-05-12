@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AddHallComponent } from './add-hall/add-hall.component';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { HallCardComponent } from './hall-card/hall-card.component';
 import { Hall } from '../../model/Hall';
 import { HallType } from '../../model/HallType';
@@ -24,11 +24,21 @@ import { HallService } from './services/hall.service';
 export class HallsComponent implements OnInit {
   halls: Hall[] = [];
 
-  constructor(private hallService: HallService) {}
+  constructor(private hallService: HallService, private router: Router) {}
 
   ngOnInit(): void {
     this.hallService.getHalls().subscribe((res) => {
-      this.halls = res;
+      this.halls = res.body;
     });
+  }
+
+  navigateToAddHall() {
+    this.router.navigate(['/add-hall'], { state: { isFormUpdate: false } });
+  }
+
+  onHallUpdated(event: any) {
+    if (event === 'hallDeleted') {
+      this.ngOnInit();
+    }
   }
 }

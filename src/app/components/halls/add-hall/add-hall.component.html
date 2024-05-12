@@ -18,11 +18,7 @@
     <div class="add-sala-form-group select">
       <label for="tipSale">Tip sale</label>
       <select name="tipSale" [(ngModel)]="hall.tipSale">
-        <option
-          *ngFor="let item of hallTypes; index as i"
-          [ngValue]="item"
-          [selected]="item.id === selectedHallTypeOption.id"
-        >
+        <option *ngFor="let item of hallTypes; index as i" [ngValue]="item">
           {{ item.naziv }}
         </option>
       </select>
@@ -41,12 +37,8 @@
     </div>
     <div class="add-sala-form-group">
       <label for="status">Status</label>
-      <select name="status" [(ngModel)]="hall.statusSale">
-        <option
-          *ngFor="let item of hallStatuses; index as i"
-          [ngValue]="item"
-          [selected]="item.id === selectedHallStatusOption.id"
-        >
+      <select [(ngModel)]="hall.statusSale">
+        <option *ngFor="let item of hallStatuses; index as i" [ngValue]="item">
           {{ item.status }}
         </option>
       </select>
