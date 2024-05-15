@@ -1,0 +1,45 @@
+<div class="login-container">
+  <div class="login-form">
+    <img
+      src="/assets/personImageLogin.png"
+      alt=""
+      style="
+        position: absolute;
+        top: -90px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    />
+    <input
+      type="text"
+      style="background-image: url('/assets/emailIcon.png')"
+      [(ngModel)]="user.username"
+    />
+    <input
+      type="password"
+      style="background-image: url('/assets/passwordIcon.png')"
+      [(ngModel)]="user.password"
+    />
+    <p
+      style="
+        font-size: 21px;
+        color: #f48580;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+      "
+    >
+      Don’t have an account?<br />
+      Register here!
+    </p>
+    <button
+      class="button"
+      style="background-color: #004a7c; color: #fff"
+      (click)="handleLogin()"
+    >
+      Login
+    </button>
+  </div>
+</div>

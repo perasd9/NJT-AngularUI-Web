@@ -46,7 +46,11 @@ export class AddHallComponent implements OnInit {
     private loction: LocationStrategy,
     private toast: NgToastService,
     private router: Router
-  ) {}
+  ) {
+    if (localStorage.getItem('jwt') == null) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit(): void {
     const state = this.loction.getState() as {

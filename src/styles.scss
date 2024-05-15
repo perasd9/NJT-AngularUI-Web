@@ -35,3 +35,15 @@ html {
   border: none;
   cursor: pointer;
 }
+
+.fixed-button {
+  position: fixed;
+  bottom: 70px;
+  right: 80px;
+  width: 100px;
+  height: 70px;
+  border-radius: 50px;
+  background-color: $colorBlue;
+  color: $colorYellow;
+  border: 2px solid $colorYellow;
+}

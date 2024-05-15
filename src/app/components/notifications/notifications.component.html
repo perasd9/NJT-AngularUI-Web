@@ -1,0 +1,7 @@
+<div class="notifications">
+  <div class="notification" *ngFor="let item of reservations; index as i">
+    <app-notification-card
+      [reservationNotification]="item"
+    ></app-notification-card>
+  </div>
+</div>

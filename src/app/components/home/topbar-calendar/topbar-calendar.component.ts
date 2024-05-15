@@ -1,5 +1,12 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-topbar-calendar',
@@ -23,7 +30,12 @@ export class TopbarCalendarComponent implements OnInit {
   @ViewChild('datesContainer') datesContainer!: ElementRef;
 
   dates: Date[] = [];
+
+  @Output()
+  selectedDateChanging: EventEmitter<Date> = new EventEmitter<Date>();
+
   selectedDate: number = 0;
+
   ngOnInit(): void {
     for (let i = 1; i <= this.lastDate.getDate(); i++) {
       this.dates.push(
@@ -44,5 +56,16 @@ export class TopbarCalendarComponent implements OnInit {
       left: this.datesContainer.nativeElement.scrollLeft - 400,
       behavior: 'smooth',
     });
+  }
+
+  handleSelectDate(i: number) {
+    this.selectedDate = i;
+    this.selectedDateChanging.emit(
+      new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        this.selectedDate + 1
+      )
+    );
   }
 }

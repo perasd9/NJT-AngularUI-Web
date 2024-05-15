@@ -1,5 +1,5 @@
-<div class="main-page">
-  <app-sidebar />
+<div [ngClass]="{ 'main-page': showMainPage }">
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
   <router-outlet></router-outlet>
   <ng-toast></ng-toast>
 </div>

@@ -1,20 +1,20 @@
 @use "../../../../styles.scss" as style;
 
 .top-calendar {
-  height: 150px;
+  height: 120px;
   width: 100%;
   background-color: style.$colorYellow;
   border-radius: 0 0 20px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
 
   .dates {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 80%;
+    max-width: 100%;
     min-width: 40%;
     gap: 3rem;
     overflow: hidden;
@@ -29,7 +29,7 @@
 
   .selected {
     background-color: style.$colorPurple;
-    padding: 30px 5px;
+    padding: 23px 5px;
     border-radius: 40px;
   }
 }

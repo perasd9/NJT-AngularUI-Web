@@ -1,1 +1,10 @@
-<app-topbar-calendar></app-topbar-calendar>
+<app-topbar-calendar
+  (selectedDateChanging)="getOutputSelectedDate($event)"
+></app-topbar-calendar>
+
+<div class="reservations">
+  <app-reservations
+    style="width: 100%; display: flex; justify-content: center; height: 100%"
+    [selectedDate]="selectedDate"
+  ></app-reservations>
+</div>

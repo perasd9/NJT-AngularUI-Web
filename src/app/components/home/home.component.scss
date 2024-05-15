@@ -1,0 +1,11 @@
+.reservations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto;
+  width: 90%;
+  height: 100%;
+  max-height: calc(100% - 150px - 3rem);
+  overflow-y: scroll;
+  scrollbar-width: none;
+}

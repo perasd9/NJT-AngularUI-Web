@@ -1,4 +1,9 @@
 <div class="hall-cards">
+  <div class="search-halls">
+    <p>Search</p>
+    <input type="text" placeholder="..." />
+    <button class="button">Pretrazi</button>
+  </div>
   <app-hall-card
     *ngFor="let item of halls"
     [hall]="item"

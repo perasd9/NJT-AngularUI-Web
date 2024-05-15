@@ -1,0 +1,27 @@
+@use "../../../styles.scss" as style;
+
+.reservation-table {
+  //   border: 3px solid black;
+  min-width: 100%;
+  font-size: 1.5rem;
+  color: #fff;
+
+  th,
+  td {
+    height: 90px;
+    width: 100px;
+    background-color: #60c3ad;
+    text-align: center;
+    font-weight: 700;
+  }
+  th:nth-child(even) {
+    background-color: style.$colorBlue;
+  }
+  th:nth-child(odd) {
+    background-color: style.$colorPurple;
+  }
+}
+
+.reserved {
+  background-color: #f34d45 !important;
+}

@@ -10,14 +10,25 @@
   scrollbar-width: none;
 }
 
-.fixed-button {
-  position: fixed;
-  bottom: 70px;
-  right: 80px;
-  width: 100px;
-  height: 70px;
-  border-radius: 50px;
-  background-color: style.$colorBlue;
-  color: style.$colorYellow;
-  border: 2px solid style.$colorYellow;
+.search-halls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem auto;
+
+  p,
+  input {
+    font-size: 1.7rem;
+  }
+  p {
+    font-weight: 700;
+  }
+
+  input {
+    border-radius: 20px;
+    border: 3px solid style.$colorYellow;
+    padding: 2px 10px;
+  }
 }

@@ -1,0 +1,26 @@
+@use "../../../../styles.scss" as style;
+
+.notifiation-card {
+  width: 70%;
+  height: 100px;
+  border-radius: 20px;
+  margin: 0 auto;
+  background-color: style.$colorBlue;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+  .informations {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+  .actions {
+    width: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+}
