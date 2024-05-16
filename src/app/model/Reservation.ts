@@ -5,6 +5,8 @@ import { User } from './User';
 
 export class Reservation {
   id: number;
+  svrha?: string;
+  razlogOdjave?: string;
   sala?: Hall;
   salaId?: number;
   statusRezervacije?: ReservationStatus;
@@ -15,6 +17,8 @@ export class Reservation {
 
   constructor(
     id: number,
+    svrha?: string,
+    razlogOdjave?: string,
     sala?: Hall,
     salaId?: number,
     statusRezervacije?: ReservationStatus,
@@ -31,5 +35,7 @@ export class Reservation {
     this.user = user;
     this.userId = userId;
     this.vremeDatum = vremeDatum ? new Date(vremeDatum) : undefined;
+    this.svrha = svrha;
+    this.razlogOdjave = razlogOdjave;
   }
 }

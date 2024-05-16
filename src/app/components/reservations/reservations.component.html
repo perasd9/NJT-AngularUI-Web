@@ -17,6 +17,7 @@
           class="button"
           *ngIf="isReserved(hall, hour)"
           style="width: 50%; border-radius: 10px; height: 30px; font-size: 15px"
+          (click)="showAddReservationModal()"
         >
           Vise...
         </button>

@@ -14,7 +14,16 @@
 
     <div>
       <label>Datum i vreme: *</label>
-      <input type="datetime-local" name="datum" />
+      <input
+        type="datetime-local"
+        name="datum"
+        [(ngModel)]="reservation.vremeDatum"
+      />
+    </div>
+
+    <div>
+      <label>Svrha: *</label>
+      <input type="text" name="svrha" [(ngModel)]="reservation.svrha" />
     </div>
 
     <div>
@@ -28,7 +37,7 @@
     </div>
 
     <div>
-      <button class="button">Rezervisi</button>
+      <button class="button" (click)="handleRezervisi()">Rezervisi</button>
     </div>
   </form>
 </div>

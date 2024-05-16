@@ -24,6 +24,36 @@ export class HallService {
       );
   }
 
+  getActiveHalls() {
+    return this.http
+      .get<any>(`http://localhost:8080/api/v1/sala/active`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        }),
+        observe: 'response',
+      })
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  getHallsByName(name: string) {
+    return this.http
+      .get<any>(`http://localhost:8080/api/v1/sala/search?naziv=${name}`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        }),
+        observe: 'response',
+      })
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
   getHallTypes() {
     return this.http
       .get<any>(`http://localhost:8080/api/v1/tipsale`, {

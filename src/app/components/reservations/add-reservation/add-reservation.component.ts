@@ -1,10 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
 import { HallService } from '../../halls/services/hall.service';
 import { Hall } from '../../../model/Hall';
 import { Reservation } from '../../../model/Reservation';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgToastService } from 'ng-angular-popup';
+import { ReservationStatus } from '../../../model/ReservationStatus';
+import { User } from '../../../model/User';
 
 @Component({
   selector: 'app-add-reservation',
@@ -18,24 +21,29 @@ export class AddReservationComponent implements OnInit {
   addReservation!: ElementRef;
 
   halls!: Hall[];
+
+  @Input({ required: false })
   reservation: Reservation = new Reservation(
     0,
+    '',
+    '',
     undefined,
     0,
-    undefined,
+    new ReservationStatus(0, ''),
     0,
-    undefined,
+    new User(0, '', '', '', '', false, false),
     0,
     undefined
   );
 
   constructor(
     private reservationService: ReservationService,
-    private hallService: HallService
+    private hallService: HallService,
+    private toast: NgToastService
   ) {}
 
   ngOnInit(): void {
-    this.hallService.getHalls().subscribe(
+    this.hallService.getActiveHalls().subscribe(
       (res) => {
         this.halls = res.body;
         this.reservation.sala = this.halls[0];
@@ -51,5 +59,25 @@ export class AddReservationComponent implements OnInit {
   }
   handleCloseAddReservationModal() {
     this.addReservation.nativeElement.style.display = 'none';
+  }
+
+  handleRezervisi() {
+    this.reservation.user!.id = 1;
+    this.reservationService.sendReservationRequest(this.reservation).subscribe(
+      (res) => {
+        if (res.status == 200) {
+          this.addReservation.nativeElement.style.display = 'none';
+
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Zahtev za rezervaciju je uspesno poslat!',
+            duration: 3000,
+          });
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

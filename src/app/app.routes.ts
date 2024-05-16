@@ -4,6 +4,7 @@ import { HallsComponent } from './components/halls/halls.component';
 import { AddHallComponent } from './components/halls/add-hall/add-hall.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -11,4 +12,5 @@ export const routes: Routes = [
   { path: 'add-hall', component: AddHallComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'profile-info', component: ProfileInfoComponent },
 ];

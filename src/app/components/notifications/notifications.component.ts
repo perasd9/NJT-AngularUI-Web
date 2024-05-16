@@ -26,15 +26,13 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reservationService
-      .getReservations(new Date('2024-05-12 00:00'))
-      .subscribe(
-        (res) => {
-          this.reservations = res;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    this.reservationService.getReservationsRequests().subscribe(
+      (res) => {
+        this.reservations = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

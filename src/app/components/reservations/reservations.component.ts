@@ -67,7 +67,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
       }
     );
 
-    this.hallService.getHalls().subscribe(
+    this.hallService.getActiveHalls().subscribe(
       (res) => {
         this.halls = res.body;
       },

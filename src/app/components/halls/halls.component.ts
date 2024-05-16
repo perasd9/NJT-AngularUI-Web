@@ -5,8 +5,9 @@ import { HallCardComponent } from './hall-card/hall-card.component';
 import { Hall } from '../../model/Hall';
 import { HallType } from '../../model/HallType';
 import { HallStatus } from '../../model/HallStatus';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { HallService } from './services/hall.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-halls',
@@ -17,12 +18,15 @@ import { HallService } from './services/hall.service';
     RouterLinkActive,
     HallCardComponent,
     NgFor,
+    CommonModule,
+    FormsModule,
   ],
   templateUrl: './halls.component.html',
   styleUrl: './halls.component.scss',
 })
 export class HallsComponent implements OnInit {
   halls: Hall[] = [];
+  searchName: string = '';
 
   constructor(private hallService: HallService, private router: Router) {
     if (localStorage.getItem('jwt') == null) {
@@ -31,9 +35,14 @@ export class HallsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hallService.getHalls().subscribe((res) => {
-      this.halls = res.body;
-    });
+    this.hallService.getHalls().subscribe(
+      (res) => {
+        this.halls = res.body;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   navigateToAddHall() {
@@ -44,5 +53,16 @@ export class HallsComponent implements OnInit {
     if (event === 'hallDeleted') {
       this.ngOnInit();
     }
+  }
+
+  handleSearchHalls() {
+    this.hallService.getHallsByName(this.searchName).subscribe(
+      (res) => {
+        this.halls = res.body;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

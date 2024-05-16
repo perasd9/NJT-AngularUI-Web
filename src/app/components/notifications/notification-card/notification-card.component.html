@@ -1,9 +1,19 @@
 <div class="notifiation-card">
   <div class="informations">
-    <h2>Sala <br />{{ reservationNotification.sala?.naziv }}</h2>
-    <h2>Korisnik <br />{{ reservationNotification.user?.username }}</h2>
     <h2>
-      Datum <br />{{ reservationNotification.vremeDatum?.toLocaleDateString() }}
+      <span style="color: #ce589f">Sala</span> <br />{{
+        reservationNotification.sala?.naziv
+      }}
+    </h2>
+    <h2>
+      <span style="color: #ce589f">Korisnik</span> <br />{{
+        reservationNotification.user?.username
+      }}
+    </h2>
+    <h2>
+      <span style="color: #ce589f">Datum</span> <br />{{
+        reservationNotification.vremeDatum?.toLocaleDateString()
+      }}
     </h2>
   </div>
   <div class="actions">

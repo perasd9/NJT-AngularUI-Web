@@ -1,8 +1,8 @@
 export class ReservationStatus {
   id: number;
-  status: number;
+  status: string;
 
-  constructor(id: number, status: number) {
+  constructor(id: number, status: string) {
     this.id = id;
     this.status = status;
   }
