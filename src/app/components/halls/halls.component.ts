@@ -28,11 +28,7 @@ export class HallsComponent implements OnInit {
   halls: Hall[] = [];
   searchName: string = '';
 
-  constructor(private hallService: HallService, private router: Router) {
-    if (localStorage.getItem('jwt') == null) {
-      this.router.navigate(['/login']);
-    }
-  }
+  constructor(private hallService: HallService, private router: Router) {}
 
   ngOnInit(): void {
     this.hallService.getHalls().subscribe(

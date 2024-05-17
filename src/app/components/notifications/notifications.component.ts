@@ -19,11 +19,7 @@ export class NotificationsComponent implements OnInit {
   constructor(
     private router: Router,
     private reservationService: ReservationService
-  ) {
-    if (localStorage.getItem('jwt') == null) {
-      this.router.navigate(['/login']);
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.reservationService.getReservationsRequests().subscribe(
@@ -34,5 +30,9 @@ export class NotificationsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  reservationEmitter() {
+    this.ngOnInit();
   }
 }

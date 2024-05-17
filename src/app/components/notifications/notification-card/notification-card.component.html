@@ -17,7 +17,19 @@
     </h2>
   </div>
   <div class="actions">
-    <button class="button" style="background-color: #60c3ad">Prihvati</button>
-    <button class="button" style="background-color: #f34d45">Odbij</button>
+    <button
+      class="button"
+      style="background-color: #60c3ad"
+      (click)="handlePrihvatiRezervaciju()"
+    >
+      Prihvati
+    </button>
+    <button
+      class="button"
+      style="background-color: #f34d45"
+      (click)="handleOdbijRezervaciju()"
+    >
+      Odbij
+    </button>
   </div>
 </div>

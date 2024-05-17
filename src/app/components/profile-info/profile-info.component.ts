@@ -10,9 +10,5 @@ import { ProfileService } from './sevice/profile.service';
   styleUrl: './profile-info.component.scss',
 })
 export class ProfileInfoComponent {
-  constructor(private router: Router, private profileService: ProfileService) {
-    if (localStorage.getItem('jwt') == null) {
-      this.router.navigate(['/login']);
-    }
-  }
+  constructor(private router: Router, private profileService: ProfileService) {}
 }

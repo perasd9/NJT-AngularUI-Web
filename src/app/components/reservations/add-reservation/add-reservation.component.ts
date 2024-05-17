@@ -31,7 +31,7 @@ export class AddReservationComponent implements OnInit {
     0,
     new ReservationStatus(0, ''),
     0,
-    new User(0, '', '', '', '', false, false),
+    new User(0, '', '', '', '', false, false, 'user'),
     0,
     undefined
   );

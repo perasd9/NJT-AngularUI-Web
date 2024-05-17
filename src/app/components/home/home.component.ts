@@ -17,11 +17,7 @@ export class HomeComponent {
     1
   );
 
-  constructor(private router: Router) {
-    if (localStorage.getItem('jwt') == null) {
-      this.router.navigate(['/login']);
-    }
-  }
+  constructor(private router: Router) {}
   getOutputSelectedDate(selectedDate: Date) {
     this.selectedDate = selectedDate;
   }

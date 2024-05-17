@@ -2,6 +2,7 @@
   <div class="notification" *ngFor="let item of reservations; index as i">
     <app-notification-card
       [reservationNotification]="item"
+      (reservationEmitter)="reservationEmitter()"
     ></app-notification-card>
   </div>
 </div>

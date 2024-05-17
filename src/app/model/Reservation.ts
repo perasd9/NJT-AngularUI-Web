@@ -1,5 +1,4 @@
 import { Hall } from './Hall';
-import { HallStatus } from './HallStatus';
 import { ReservationStatus } from './ReservationStatus';
 import { User } from './User';
 
@@ -25,7 +24,7 @@ export class Reservation {
     statusRezervacijeId?: number,
     user?: User,
     userId?: number,
-    vremeDatum?: Date | string
+    vremeDatum?: Date
   ) {
     this.id = id;
     this.sala = sala;
