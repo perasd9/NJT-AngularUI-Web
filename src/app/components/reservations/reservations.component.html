@@ -17,17 +17,31 @@
           class="button"
           *ngIf="isReserved(hall, hour)"
           style="width: 50%; border-radius: 10px; height: 30px; font-size: 15px"
-          (click)="showAddReservationModal()"
+          (click)="showAddReservationModal(getReservation(hall, hour))"
         >
           Vise...
+        </button>
+        <button
+          *ngIf="isReserved(hall, hour)"
+          class="close-button"
+          (click)="cancelReservationModal(getReservation(hall, hour))"
+        >
+          &times;
         </button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<button class="button fixed-button" (click)="showAddReservationModal()">
+<button
+  class="button fixed-button"
+  (click)="showAddReservationModal(getReservation(undefined, hours[0]))"
+>
   Rezervisi
 </button>
 
-<app-add-reservation #addReservationComponent></app-add-reservation>
+<app-add-reservation
+  #addReservationComponent
+  [hours]="this.hours"
+  (reservationUpated)="reservationUpdated()"
+></app-add-reservation>

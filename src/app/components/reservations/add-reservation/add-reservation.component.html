@@ -14,11 +14,11 @@
 
     <div>
       <label>Datum i vreme: *</label>
-      <input
-        type="datetime-local"
-        name="datum"
-        [(ngModel)]="reservation.vremeDatum"
-      />
+      <select name="vremeDatum" [(ngModel)]="reservation.vremeDatum">
+        <option *ngFor="let item of hours; index as i" [ngValue]="item">
+          {{ item.toString().slice(16, 24) }}
+        </option>
+      </select>
     </div>
 
     <div>
@@ -28,16 +28,34 @@
 
     <div>
       <label>User: *</label>
-      <input
-        type="text"
-        name="datum"
-        disabled
-        [value]="getUserFromLocalStorage()"
-      />
+      <input type="text" name="datum" disabled [value]="getUserFromAuth()" />
     </div>
 
     <div>
-      <button class="button" (click)="handleRezervisi()">Rezervisi</button>
+      <button
+        class="button"
+        (click)="handleRezervisi()"
+        *ngIf="this.reservation.id == 0"
+      >
+        Rezervisi
+      </button>
+      <button
+        class="button"
+        (click)="handleUpdateReservation()"
+        *ngIf="
+          this.reservation.id != 0 &&
+          authService.getUser().id == this.reservation.user?.id
+        "
+      >
+        Izmeni
+      </button>
+      <button
+        class="button"
+        (click)="handleCloseReservation()"
+        style="background-color: #f34d45; color: #fff"
+      >
+        Odjavi
+      </button>
     </div>
   </form>
 </div>

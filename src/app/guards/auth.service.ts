@@ -12,6 +12,10 @@ export class AuthService {
     this.user = user;
   }
 
+  getUser(): any {
+    return this.user;
+  }
+
   isLoggedIn(): boolean {
     return this.user !== null;
   }

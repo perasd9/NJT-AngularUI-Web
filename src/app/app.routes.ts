@@ -13,17 +13,17 @@ export const routes: Routes = [
   {
     path: 'halls',
     component: HallsComponent,
-    canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-hall',
     component: AddHallComponent,
-    canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'notifications',
     component: NotificationsComponent,
-    canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },
   {

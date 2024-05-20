@@ -1,6 +1,31 @@
 <div class="profile-info">
-  <h2>Ime i prezime : Pera</h2>
-  <h2>Email : pera&#64;gmail.com</h2>
-  <h2>: Pera</h2>
-  <h2 style="color: red">Logout</h2>
+  <h2>Ime i prezime : {{ user.imePrezime }}</h2>
+  <h2>Email : {{ user.email }}</h2>
+  <h2>Username : {{ user.username }}</h2>
+  <div class="change-password">
+    <div class="change-password-title">
+      <h2>Promena lozinke</h2>
+      <h2
+        [ngClass]="{
+          expanded: showPasswordChange,
+          collapsed: !showPasswordChange
+        }"
+        (click)="togglePasswordChange()"
+        style="
+          padding: 0.6rem 1rem;
+          background-color: #ffcd67;
+          border-radius: 1.5rem;
+        "
+      >
+        &#9662;
+      </h2>
+    </div>
+    <div *ngIf="showPasswordChange" class="change-password-form">
+      <input type="password" placeholder="Trenutna lozinka" />
+      <input type="password" placeholder="Nova lozinka" />
+      <input type="password" placeholder="Ponovi novu lozinku" />
+      <button class="button">Promeni lozinku</button>
+    </div>
+  </div>
+  <h2 style="color: red; cursor: pointer" (click)="logout()">Odjavi se</h2>
 </div>

@@ -67,6 +67,7 @@ export class ReservationService {
   }
 
   sendReservationRequest(reservation: Reservation) {
+    reservation.vremeDatum?.setHours(reservation.vremeDatum.getHours() + 2);
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/kreiraj`,
@@ -85,8 +86,10 @@ export class ReservationService {
             type: 'User',
           },
           vremeDatum: `${reservation.vremeDatum
-            ?.toString()
-            .slice(0, 10)} ${reservation.vremeDatum?.toString().slice(11, 16)}`,
+            ?.toISOString()
+            .slice(0, 10)} ${reservation.vremeDatum
+            ?.toISOString()
+            .slice(11, 16)}`,
         },
         {
           headers: new HttpHeaders({
@@ -144,6 +147,83 @@ export class ReservationService {
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/odbij`,
+        {
+          id: reservation.id,
+          svrha: reservation.svrha,
+          razlogOdjave: reservation.razlogOdjave,
+          sala: {
+            id: reservation.sala?.id,
+          },
+          statusRezervacije: {
+            id: reservation.statusRezervacije?.id,
+          },
+          user: {
+            id: reservation.user?.id,
+            type: 'User',
+          },
+          vremeDatum: `${reservation.vremeDatum
+            ?.toISOString()
+            .slice(0, 10)} ${reservation.vremeDatum
+            ?.toISOString()
+            .slice(11, 16)}`,
+        },
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          }),
+          observe: 'response',
+        }
+      )
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  updateReservation(reservation: Reservation) {
+    reservation.vremeDatum?.setHours(reservation.vremeDatum.getHours() + 2);
+    return this.http
+      .put<any>(
+        `http://localhost:8080/api/v1/rezervacija`,
+        {
+          id: reservation.id,
+          svrha: reservation.svrha,
+          razlogOdjave: reservation.razlogOdjave,
+          sala: {
+            id: reservation.sala?.id,
+          },
+          statusRezervacije: {
+            id: reservation.statusRezervacije?.id,
+          },
+          user: {
+            id: reservation.user?.id,
+            type: 'User',
+          },
+          vremeDatum: `${reservation.vremeDatum
+            ?.toISOString()
+            .slice(0, 10)} ${reservation.vremeDatum
+            ?.toISOString()
+            .slice(11, 16)}`,
+        },
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          }),
+          observe: 'response',
+        }
+      )
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  closeReservation(reservation: Reservation) {
+    return this.http
+      .post<any>(
+        `http://localhost:8080/api/v1/rezervacija/odjavi`,
         {
           id: reservation.id,
           svrha: reservation.svrha,

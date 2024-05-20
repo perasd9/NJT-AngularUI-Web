@@ -3,7 +3,7 @@
 .reservation-table {
   //   border: 3px solid black;
   min-width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #fff;
 
   th,
@@ -13,6 +13,7 @@
     background-color: #60c3ad;
     text-align: center;
     font-weight: 700;
+    position: relative;
   }
   th:nth-child(even) {
     background-color: style.$colorBlue;
@@ -20,8 +21,23 @@
   th:nth-child(odd) {
     background-color: style.$colorPurple;
   }
+
+  tbody > tr > td {
+    padding-top: 15px;
+  }
 }
 
 .reserved {
   background-color: #f34d45 !important;
+}
+
+.reservation-table .close-button {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
 }
