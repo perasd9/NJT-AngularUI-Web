@@ -6,11 +6,11 @@
       /></a>
       <span class="tool-tip-text">Home</span>
     </div>
-    <div class="tool-tip">
+    <!-- <div class="tool-tip">
       <img src="./assets/reservationsIcon.png" alt="" />
       <span class="tool-tip-text">Reservations</span>
-    </div>
-    <div class="tool-tip">
+    </div> -->
+    <div class="tool-tip" *ngIf="isAdminLoggedIn()">
       <a routerLink="/notifications" routerLinkActive="active"
         ><img src="./assets/notificationsIcon.png" alt=""
       /></a>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="second-group-icons">
-    <div class="tool-tip">
+    <div class="tool-tip" *ngIf="isAdminLoggedIn()">
       <a routerLink="/halls" routerLinkActive="active"
         ><img src="./assets/settingsIcon.png" alt=""
       /></a>

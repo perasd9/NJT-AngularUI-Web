@@ -100,7 +100,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
 
     const reservation = this.reservations.find(
       (r) =>
-        r.sala!.id === hall.id &&
+        r.sale?.find((sala) => sala.id == hall.id) &&
         r.vremeDatum?.getTime() === this.selectedDate.getTime() &&
         r.statusRezervacije?.id == 1
     );
@@ -112,7 +112,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
 
     const reservation = this.reservations.find(
       (r) =>
-        r.sala!.id === hall.id &&
+        r.sale?.find((sala) => sala.id == hall.id) &&
         r.vremeDatum?.getTime() === this.selectedDate.getTime()
     );
     return reservation ? reservation.user?.username?.toString()! : '';
@@ -123,13 +123,15 @@ export class ReservationsComponent implements OnInit, OnChanges {
 
     const reservation = this.reservations.find(
       (r) =>
-        r.sala!.id === hall?.id &&
+        r.sale?.find((sala) => sala.id == hall?.id) &&
         r.vremeDatum?.getTime() === this.selectedDate.getTime()
     );
 
     if (reservation != undefined) {
-      reservation.sala = this.addReservationComponent.halls.find((hall) => {
-        return hall.id == reservation.sala!.id;
+      reservation.sale = this.addReservationComponent.halls.filter((hall) => {
+        return (
+          hall.id == reservation.sale?.find((sala) => sala.id == hall.id)?.id
+        );
       });
       reservation.vremeDatum = this.hours.find((hour) => {
         return hour.getTime() === reservation.vremeDatum?.getTime();
@@ -142,7 +144,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
           0,
           '',
           '',
-          this.addReservationComponent.halls[0],
+          this.addReservationComponent.halls,
           0,
           new ReservationStatus(0, ''),
           0,
@@ -162,10 +164,5 @@ export class ReservationsComponent implements OnInit, OnChanges {
 
   reservationUpdated() {
     this.ngOnInit();
-  }
-
-  cancelReservationModal(reservation: Reservation) {
-    //will be changed
-    this.showAddReservationModal(reservation);
   }
 }

@@ -5,7 +5,12 @@
   <form action="" id="creating-form">
     <div>
       <label>Sala: *</label>
-      <select name="sala" [(ngModel)]="reservation.sala">
+      <select
+        name="sala"
+        [(ngModel)]="reservation.sale"
+        multiple
+        style="height: 80px; scrollbar-width: none"
+      >
         <option *ngFor="let item of halls; index as i" [ngValue]="item">
           {{ item.naziv }}
         </option>
@@ -43,8 +48,9 @@
         class="button"
         (click)="handleUpdateReservation()"
         *ngIf="
-          this.reservation.id != 0 &&
-          authService.getUser().id == this.reservation.user?.id
+          (authService.isAdmin() && this.reservation.id != 0) ||
+          (this.reservation.id != 0 &&
+            authService.getUser().id == this.reservation.user?.id)
         "
       >
         Izmeni
@@ -53,6 +59,7 @@
         class="button"
         (click)="handleCloseReservation()"
         style="background-color: #f34d45; color: #fff"
+        *ngIf="showOdjaviButton()"
       >
         Odjavi
       </button>

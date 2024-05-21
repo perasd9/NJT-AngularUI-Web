@@ -21,10 +21,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.isLoggedIn() && this.user.role === 'admin';
+    return this.isLoggedIn() && this.user.role === 'ADMIN';
   }
 
   isUser(): boolean {
-    return this.isLoggedIn() && this.user.role !== 'admin';
+    return this.isLoggedIn() && this.user.role !== 'ADMIN';
   }
 }

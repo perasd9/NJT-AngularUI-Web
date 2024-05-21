@@ -75,9 +75,7 @@ export class ReservationService {
           id: 0,
           svrha: reservation.svrha,
           razlogOdjave: reservation.razlogOdjave,
-          sala: {
-            id: reservation.sala?.id,
-          },
+          sale: reservation.sale,
           statusRezervacije: {
             id: reservation.statusRezervacije?.id,
           },
@@ -113,9 +111,7 @@ export class ReservationService {
           id: reservation.id,
           svrha: reservation.svrha,
           razlogOdjave: reservation.razlogOdjave,
-          sala: {
-            id: reservation.sala?.id,
-          },
+          sale: reservation.sale,
           statusRezervacije: {
             id: reservation.statusRezervacije?.id,
           },
@@ -151,9 +147,7 @@ export class ReservationService {
           id: reservation.id,
           svrha: reservation.svrha,
           razlogOdjave: reservation.razlogOdjave,
-          sala: {
-            id: reservation.sala?.id,
-          },
+          sale: reservation.sale,
           statusRezervacije: {
             id: reservation.statusRezervacije?.id,
           },
@@ -190,9 +184,7 @@ export class ReservationService {
           id: reservation.id,
           svrha: reservation.svrha,
           razlogOdjave: reservation.razlogOdjave,
-          sala: {
-            id: reservation.sala?.id,
-          },
+          sale: reservation.sale,
           statusRezervacije: {
             id: reservation.statusRezervacije?.id,
           },
@@ -228,9 +220,7 @@ export class ReservationService {
           id: reservation.id,
           svrha: reservation.svrha,
           razlogOdjave: reservation.razlogOdjave,
-          sala: {
-            id: reservation.sala?.id,
-          },
+          sale: reservation.sale,
           statusRezervacije: {
             id: reservation.statusRezervacije?.id,
           },

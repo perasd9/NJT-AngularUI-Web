@@ -21,13 +21,6 @@
         >
           Vise...
         </button>
-        <button
-          *ngIf="isReserved(hall, hour)"
-          class="close-button"
-          (click)="cancelReservationModal(getReservation(hall, hour))"
-        >
-          &times;
-        </button>
       </td>
     </tr>
   </tbody>

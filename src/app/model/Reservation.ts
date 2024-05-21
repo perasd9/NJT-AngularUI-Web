@@ -6,8 +6,7 @@ export class Reservation {
   id: number;
   svrha?: string;
   razlogOdjave?: string;
-  sala?: Hall;
-  salaId?: number;
+  sale?: Hall[];
   statusRezervacije?: ReservationStatus;
   statusRezervacijeId?: number;
   user?: User;
@@ -18,7 +17,7 @@ export class Reservation {
     id: number,
     svrha?: string,
     razlogOdjave?: string,
-    sala?: Hall,
+    sale?: Hall[],
     salaId?: number,
     statusRezervacije?: ReservationStatus,
     statusRezervacijeId?: number,
@@ -27,8 +26,7 @@ export class Reservation {
     vremeDatum?: Date
   ) {
     this.id = id;
-    this.sala = sala;
-    this.salaId = salaId;
+    this.sale = sale;
     this.statusRezervacije = statusRezervacije;
     this.statusRezervacijeId = statusRezervacijeId;
     this.user = user;

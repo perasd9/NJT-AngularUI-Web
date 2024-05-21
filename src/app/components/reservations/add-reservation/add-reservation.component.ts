@@ -64,7 +64,7 @@ export class AddReservationComponent implements OnInit {
     this.hallService.getActiveHalls().subscribe(
       (res) => {
         this.halls = res.body;
-        this.reservation.sala = this.halls[0];
+        this.reservation.sale = this.halls;
       },
       (err) => {
         console.log(err);
@@ -157,5 +157,15 @@ export class AddReservationComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  showOdjaviButton(): boolean {
+    if (this.reservation.id != 0 && this.authService.isAdmin()) return true;
+    else if (
+      this.reservation.id != 0 &&
+      this.authService.getUser().id == this.reservation.user?.id
+    )
+      return true;
+    else return false;
   }
 }
