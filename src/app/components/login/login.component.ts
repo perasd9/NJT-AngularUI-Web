@@ -21,7 +21,13 @@ export class LoginComponent implements OnInit {
     private toast: NgToastService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    if (localStorage.getItem('user') != null) {
+      router.navigateByUrl(
+        router.lastSuccessfulNavigation?.finalUrl?.toString()!
+      );
+    }
+  }
 
   ngOnInit(): void {}
 

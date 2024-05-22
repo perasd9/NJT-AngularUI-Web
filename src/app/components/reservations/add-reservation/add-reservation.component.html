@@ -9,7 +9,7 @@
         name="sala"
         [(ngModel)]="reservation.sale"
         multiple
-        style="height: 80px; scrollbar-width: none"
+        style="height: 110px; scrollbar-width: none; padding: 8px"
       >
         <option *ngFor="let item of halls; index as i" [ngValue]="item">
           {{ item.naziv }}

@@ -19,6 +19,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { ReservationStatus } from '../../../model/ReservationStatus';
 import { User } from '../../../model/User';
 import { AuthService } from '../../../guards/auth.service';
+import { NotificationService } from '../../notifications/service/notification.service';
 
 @Component({
   selector: 'app-add-reservation',
@@ -57,7 +58,8 @@ export class AddReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private hallService: HallService,
     private toast: NgToastService,
-    public authService: AuthService
+    public authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +87,10 @@ export class AddReservationComponent implements OnInit {
       (res) => {
         if (res.status == 200) {
           this.addReservation.nativeElement.style.display = 'none';
+
+          if (JSON.parse(localStorage.getItem('user')!)?.role == 'USER') {
+            this.notificationService.sendNotification().subscribe((res) => {});
+          }
 
           this.toast.success({
             detail: 'Success',

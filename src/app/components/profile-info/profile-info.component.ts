@@ -30,6 +30,7 @@ export class ProfileInfoComponent implements OnInit {
   logout() {
     this.authService.setUser(null);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
   }
 }

@@ -1,9 +1,22 @@
 <div class="notifications">
-  <h2 style="text-align: center; font-size: 2rem">Rezervacije</h2>
-  <div class="notification" *ngFor="let item of reservations; index as i">
-    <app-notification-card
-      [reservationNotification]="item"
-      (reservationEmitter)="reservationEmitter()"
-    ></app-notification-card>
+  <div style="gap: 1.5rem; display: flex; flex-direction: column">
+    <h2 style="text-align: center; font-size: 2rem">Rezervacije</h2>
+    <div class="notification" *ngFor="let item of reservations; index as i">
+      <app-notification-card
+        [reservationNotification]="item"
+        (notificationEmitter)="notificationEmitter()"
+      ></app-notification-card>
+    </div>
+  </div>
+  <div style="gap: 1.5rem; display: flex; flex-direction: column">
+    <h2 style="text-align: center; font-size: 2rem; padding-top: 3rem">
+      Korisnici
+    </h2>
+    <div class="notification" *ngFor="let item of users; index as i">
+      <app-notification-user-card
+        [userNotification]="item"
+        (notificationEmitter)="notificationEmitter()"
+      ></app-notification-user-card>
+    </div>
   </div>
 </div>

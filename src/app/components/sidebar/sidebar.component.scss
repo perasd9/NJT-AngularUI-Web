@@ -51,6 +51,18 @@
     transition: all 0.3s;
   }
 }
+.badge {
+  position: absolute;
+  top: -13px;
+  right: -15px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  font-weight: 600;
+
+  color: white;
+  font-size: 14px;
+}
 
 .tool-tip:hover .tool-tip-text {
   transform: translateX(120px);

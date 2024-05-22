@@ -15,7 +15,7 @@ export class NotificationCardComponent {
   reservationNotification!: Reservation;
 
   @Output()
-  reservationEmitter: EventEmitter<any> = new EventEmitter<any>();
+  notificationEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private reservationService: ReservationService,
@@ -28,7 +28,7 @@ export class NotificationCardComponent {
       .subscribe(
         (res) => {
           if (res.status == 200) {
-            this.reservationEmitter.emit();
+            this.notificationEmitter.emit();
             this.toast.success({
               detail: 'Success',
               summary: 'Rezervacija je prihvacena!',
@@ -48,7 +48,7 @@ export class NotificationCardComponent {
       .subscribe(
         (res) => {
           if (res.status == 200) {
-            this.reservationEmitter.emit();
+            this.notificationEmitter.emit();
             this.toast.success({
               detail: 'Success',
               summary: 'Rezervacija je odbijena!',

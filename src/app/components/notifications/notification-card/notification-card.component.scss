@@ -24,3 +24,14 @@
     gap: 1.5rem;
   }
 }
+
+select {
+  height: 40px;
+  width: 100%;
+  font-size: 22px;
+  padding: 0 10px;
+  border-radius: 15px;
+  border: none;
+  background-color: style.$colorYellow;
+  font-weight: 600;
+}

@@ -12,8 +12,11 @@
     </div> -->
     <div class="tool-tip" *ngIf="isAdminLoggedIn()">
       <a routerLink="/notifications" routerLinkActive="active"
-        ><img src="./assets/notificationsIcon.png" alt=""
-      /></a>
+        ><img src="./assets/notificationsIcon.png" alt="" />
+        <span *ngIf="notificationCount > 0" class="badge">{{
+          notificationCount
+        }}</span></a
+      >
       <span class="tool-tip-text">Notifications</span>
     </div>
   </div>

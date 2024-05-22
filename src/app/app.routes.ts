@@ -25,7 +25,10 @@ export const routes: Routes = [
     component: NotificationsComponent,
     canActivate: [AuthGuard, AdminGuard],
   },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'profile-info',
     component: ProfileInfoComponent,
