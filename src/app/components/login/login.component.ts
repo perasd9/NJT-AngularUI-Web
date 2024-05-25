@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../model/User';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { AuthService } from '../../guards/auth.service';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RegisterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   user: User = new User(0, '', '', '', '', false, false, 'user');
+
+  @ViewChild('registerComponent')
+  registerComponent!: RegisterComponent;
 
   constructor(
     private loginService: LoginService,
@@ -56,5 +60,8 @@ export class LoginComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  showRegister() {
+    this.registerComponent.registrationModal.nativeElement.style.left = '0';
   }
 }

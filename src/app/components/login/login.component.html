@@ -12,6 +12,7 @@
         margin-right: auto;
       "
     />
+
     <input
       type="text"
       style="background-image: url('/assets/emailIcon.png')"
@@ -32,6 +33,7 @@
         text-align: center;
         cursor: pointer;
       "
+      (click)="showRegister()"
     >
       Don’t have an account?<br />
       Register here!
@@ -45,3 +47,4 @@
     </button>
   </div>
 </div>
+<app-register #registerComponent></app-register>

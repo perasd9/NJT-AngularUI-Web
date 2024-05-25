@@ -1,0 +1,27 @@
+<div class="custom-modal" #registrationModal>
+  <button class="close-modal" (click)="handleCloseAddReservationModal()">
+    X
+  </button>
+  <form action="" id="creating-form">
+    <div>
+      <label>Username: </label>
+      <input type="text" name="username" [(ngModel)]="user.username" />
+    </div>
+
+    <div>
+      <label>Email: </label>
+      <input type="text" name="email" [(ngModel)]="user.email" />
+    </div>
+    <div>
+      <label>Password: </label>
+      <input type="password" name="password" [(ngModel)]="user.password" />
+    </div>
+    <button
+      class="button"
+      style="background-color: #004a7c; color: #fff; margin-top: 1rem"
+      (click)="handleRegister()"
+    >
+      Register
+    </button>
+  </form>
+</div>

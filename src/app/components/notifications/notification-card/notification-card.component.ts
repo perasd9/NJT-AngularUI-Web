@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Reservation } from '../../../model/Reservation';
 import { ReservationService } from '../../reservations/services/reservation.service';
 import { NgToastService } from 'ng-angular-popup';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-notification-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './notification-card.component.html',
   styleUrl: './notification-card.component.scss',
 })

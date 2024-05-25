@@ -1,9 +1,10 @@
 <div class="notifiation-card">
   <div class="informations">
     <h2>
-      <span style="color: #ce589f">Sala</span> <br />{{
-        reservationNotification.id
-      }}
+      <span style="color: #ce589f">Sala</span> <br /><span
+        *ngFor="let item of reservationNotification.sale"
+        >{{ item.naziv }}
+      </span>
     </h2>
     <h2>
       <span style="color: #ce589f">Korisnik</span> <br />{{

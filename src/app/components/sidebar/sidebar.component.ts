@@ -31,7 +31,9 @@ export class SidebarComponent implements OnInit {
     });
 
     this.notificationService.notifications.subscribe((message) => {
-      if (message) {
+      if (message == '') {
+        this.notificationCount--;
+      } else {
         this.notificationCount++;
         this.toast.info({
           detail: 'Info',
@@ -44,9 +46,6 @@ export class SidebarComponent implements OnInit {
 
   notificationCount: number = 0;
 
-  public reduceNotificationCount() {
-    this.notificationCount--;
-  }
   isAdminLoggedIn(): boolean {
     return this.authService.isAdmin();
   }

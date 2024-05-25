@@ -1,0 +1,11 @@
+@use "../../../styles.scss" as style;
+
+.custom-modal {
+  display: block;
+  left: -300%;
+  transition: left 0.75s linear;
+  background-color: #ddc7ef;
+}
+label {
+  color: #000 !important;
+}

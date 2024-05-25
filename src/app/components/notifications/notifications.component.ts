@@ -9,6 +9,7 @@ import { User } from '../../model/User';
 import { AuthService } from '../../guards/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { NotificationUserCardComponent } from './notification-user-card/notification-user-card.component';
+import { NotificationService } from './service/notification.service';
 
 @Component({
   selector: 'app-notifications',
@@ -25,14 +26,12 @@ export class NotificationsComponent implements OnInit {
   reservations: Reservation[] = [];
   users: User[] = [];
 
-  @Output()
-  reduceNotificationCount: EventEmitter<any> = new EventEmitter<any>();
-
   constructor(
     private router: Router,
     private reservationService: ReservationService,
     private authService: AuthService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +59,6 @@ export class NotificationsComponent implements OnInit {
 
   notificationEmitter() {
     this.ngOnInit();
-    this.reduceNotificationCount.emit();
+    this.notificationService.decrementNotificationCount();
   }
 }

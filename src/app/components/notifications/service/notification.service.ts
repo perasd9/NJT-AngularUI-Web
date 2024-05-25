@@ -13,24 +13,29 @@ export class NotificationService {
   public notifications = this.notificationSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    console.log('CONNECTED' + JSON.parse(localStorage.getItem('user')!).role);
-    const socket = new SockJS('http://127.0.0.1:8080/ws');
+    this.connect();
+  }
+
+  connect() {
+    const socket = new SockJS(
+      `http://127.0.0.1:8080/ws?role=${
+        JSON.parse(localStorage.getItem('user')!).role
+      }`
+    );
     this.stompClient = new Client({
       webSocketFactory: () => socket as any,
-      connectHeaders: {
-        cookie: `${JSON.parse(localStorage.getItem('user')!).role}`,
-      },
     });
 
     this.stompClient.onConnect = () => {
-      document.cookie = `${JSON.parse(localStorage.getItem('user')!).role}`;
-
-      console.log('CONNECTED');
       this.stompClient.subscribe('/user/topic/notifications', (message) => {
         this.notificationSubject.next(message.body);
       });
     };
     this.stompClient.activate();
+  }
+
+  disconnect() {
+    this.stompClient.deactivate();
   }
 
   sendNotification() {
@@ -43,5 +48,9 @@ export class NotificationService {
         observe: 'response',
       }
     );
+  }
+
+  decrementNotificationCount() {
+    this.notificationSubject.next('');
   }
 }

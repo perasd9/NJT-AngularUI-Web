@@ -1,33 +1,5 @@
 @use "../../../../styles.scss" as style;
 
-.custom-modal {
-  display: none;
-  background-color: style.$colorPurple;
-  box-shadow: rgba(28, 28, 28, 0.6) 0 0 1000px 1000px;
-  max-width: 550px;
-  margin: auto;
-  padding: 50px;
-  position: absolute;
-  top: 10%;
-  left: 0;
-  right: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.close-modal {
-  width: 20px;
-  height: 20px;
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  font-size: 25px;
-  font-weight: bold;
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  cursor: pointer;
-}
 form > div {
   padding: 15px;
 }
