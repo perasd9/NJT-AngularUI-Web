@@ -22,10 +22,18 @@
       </h2>
     </div>
     <div *ngIf="showPasswordChange" class="change-password-form">
-      <input type="password" placeholder="Trenutna lozinka" />
-      <input type="password" placeholder="Nova lozinka" />
+      <input
+        type="password"
+        placeholder="Trenutna lozinka"
+        [(ngModel)]="changePasswordBody.currentPassword"
+      />
+      <input
+        type="password"
+        placeholder="Nova lozinka"
+        [(ngModel)]="changePasswordBody.newPassword"
+      />
       <input type="password" placeholder="Ponovi novu lozinku" />
-      <button class="button">Potvrdi</button>
+      <button class="button" (click)="handleChangePassword()">Potvrdi</button>
     </div>
   </div>
   <h2 style="color: red; cursor: pointer" (click)="logout()">Odjavi se</h2>

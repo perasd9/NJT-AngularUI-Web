@@ -31,15 +31,15 @@ export class SidebarComponent implements OnInit {
     });
 
     this.notificationService.notifications.subscribe((message) => {
-      if (message == '') {
-        this.notificationCount--;
-      } else {
+      if (message == 'Obavestenje poslato!') {
         this.notificationCount++;
         this.toast.info({
           detail: 'Info',
           summary: 'Stiglo je novo obavestenje!',
           duration: 4000,
         });
+      } else if (message == ' ') {
+        this.notificationCount--;
       }
     });
   }

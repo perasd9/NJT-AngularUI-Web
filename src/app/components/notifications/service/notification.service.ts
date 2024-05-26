@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Client, StompHeaders } from '@stomp/stompjs';
 import { BehaviorSubject, catchError } from 'rxjs';
 import SockJS from 'sockjs-client';
+import { User } from '../../../model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +51,32 @@ export class NotificationService {
     );
   }
 
+  acceptUser(user: User) {
+    user.type = 'Student';
+    return this.http.post<any>(
+      `http://localhost:8080/api/v1/user/accept`,
+      user,
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        }),
+        observe: 'response',
+      }
+    );
+  }
+  denyUser(user: User) {
+    return this.http.get<any>(
+      `http://localhost:8080/api/v1/user/deny/${user.id}`,
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        }),
+        observe: 'response',
+      }
+    );
+  }
+
   decrementNotificationCount() {
-    this.notificationSubject.next('');
+    this.notificationSubject.next(' ');
   }
 }

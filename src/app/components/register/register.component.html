@@ -4,17 +4,32 @@
   </button>
   <form action="" id="creating-form">
     <div>
-      <label>Username: </label>
-      <input type="text" name="username" [(ngModel)]="user.username" />
+      <label>Username </label>
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="user.username"
+        placeholder="username"
+      />
     </div>
 
     <div>
-      <label>Email: </label>
-      <input type="text" name="email" [(ngModel)]="user.email" />
+      <label>Email </label>
+      <input
+        type="text"
+        name="email"
+        [(ngModel)]="user.email"
+        placeholder="example@example.com"
+      />
     </div>
     <div>
-      <label>Password: </label>
-      <input type="password" name="password" [(ngModel)]="user.password" />
+      <label>Password </label>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="user.password"
+        placeholder="**********"
+      />
     </div>
     <button
       class="button"

@@ -16,7 +16,7 @@ export class RegisterComponent {
   @ViewChild('registrationModal')
   registrationModal!: ElementRef;
 
-  user: User = new User(0, '', '', '', '', false, false, 'user');
+  user: User = new User(0, '', '', '', '', false, false, 'user', 'USER');
 
   constructor(
     private registerService: RegisterService,
@@ -25,6 +25,7 @@ export class RegisterComponent {
 
   handleCloseAddReservationModal() {
     this.registrationModal.nativeElement.style.left = '-300%';
+    this.user = new User(0, '', '', '', '', false, false, 'user', 'USER');
   }
   handleRegister() {
     this.registerService.register(this.user).subscribe((res) => {

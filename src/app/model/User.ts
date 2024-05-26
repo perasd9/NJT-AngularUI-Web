@@ -7,6 +7,7 @@ export class User {
   odobren: boolean;
   potvrdjenMail: boolean;
   type: string;
+  role: string;
 
   constructor(
     id: number,
@@ -16,7 +17,8 @@ export class User {
     password: string,
     odobren: boolean,
     potvrdjenMail: boolean,
-    type: string
+    type: string,
+    role: string
   ) {
     this.id = id;
     this.username = username;
@@ -26,5 +28,6 @@ export class User {
     this.odobren = odobren;
     this.potvrdjenMail = potvrdjenMail;
     this.type = type;
+    this.role = role;
   }
 }

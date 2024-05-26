@@ -1,10 +1,10 @@
 <div class="notifiation-card">
   <div class="informations">
-    <h2>
+    <!-- <h2>
       <span style="color: #ce589f">Username</span> <br />{{
         userNotification.username
       }}
-    </h2>
+    </h2> -->
     <h2>
       <span style="color: #ce589f">Email</span><br />{{
         userNotification.email
@@ -14,14 +14,26 @@
       <span style="color: #ce589f">Uloga</span>
       <br />
 
-      <select name="role" id="">
+      <select name="role" id="" [(ngModel)]="userNotification.role">
         <option value="ADMIN">Admin</option>
         <option value="USER">User</option>
       </select>
     </h2>
   </div>
   <div class="actions">
-    <button class="button" style="background-color: #60c3ad">Prihvati</button>
-    <button class="button" style="background-color: #f34d45">Odbij</button>
+    <button
+      class="button"
+      style="background-color: #60c3ad"
+      (click)="handleAcceptRegistration()"
+    >
+      Prihvati
+    </button>
+    <button
+      class="button"
+      style="background-color: #f34d45"
+      (click)="handleDenyRegistration()"
+    >
+      Odbij
+    </button>
   </div>
 </div>

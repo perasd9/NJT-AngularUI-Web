@@ -15,7 +15,7 @@ import { RegisterComponent } from '../register/register.component';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  user: User = new User(0, '', '', '', '', false, false, 'user');
+  user: User = new User(0, '', '', '', '', false, false, 'user', 'USER');
 
   @ViewChild('registerComponent')
   registerComponent!: RegisterComponent;

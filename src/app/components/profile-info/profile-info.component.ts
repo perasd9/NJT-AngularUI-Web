@@ -4,18 +4,26 @@ import { ProfileService } from './sevice/profile.service';
 import { AuthService } from '../../guards/auth.service';
 import { User } from '../../model/User';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-profile-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './profile-info.component.html',
   styleUrl: './profile-info.component.scss',
 })
 export class ProfileInfoComponent implements OnInit {
   user!: User;
+  changePasswordBody: any = { currentPassword: '', newPassword: '' };
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private profileService: ProfileService,
+    private toast: NgToastService
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
@@ -32,5 +40,24 @@ export class ProfileInfoComponent implements OnInit {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
+  }
+  handleChangePassword() {
+    this.profileService
+      .changePassword(this.changePasswordBody)
+      .subscribe((res) => {
+        if (res.status == 200) {
+          this.toast.success({
+            duration: 1500,
+            detail: 'Success',
+            summary: 'Vasa lozinka je uspesno promenjena!',
+          });
+        } else {
+          this.toast.error({
+            duration: 1500,
+            detail: 'Error',
+            summary: 'Neuspesna promena lozinke proverite vasa polja!',
+          });
+        }
+      });
   }
 }
