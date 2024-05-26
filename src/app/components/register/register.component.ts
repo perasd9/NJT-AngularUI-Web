@@ -20,8 +20,7 @@ export class RegisterComponent {
 
   constructor(
     private registerService: RegisterService,
-    private toast: NgToastService,
-    private router: Router
+    private toast: NgToastService
   ) {}
 
   handleCloseAddReservationModal() {
@@ -30,6 +29,7 @@ export class RegisterComponent {
   handleRegister() {
     this.registerService.register(this.user).subscribe((res) => {
       if (res.status == 201) {
+        this.handleCloseAddReservationModal();
         this.toast.success({
           detail: 'Success',
           summary:
