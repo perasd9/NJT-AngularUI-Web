@@ -63,6 +63,8 @@ export class AddReservationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.reservation.vremeDatum = this.hours[0];
+
     this.hallService.getActiveHalls().subscribe(
       (res) => {
         this.halls = res.body;
@@ -75,7 +77,7 @@ export class AddReservationComponent implements OnInit {
   }
 
   getUserFromAuth() {
-    return this.authService.getUser().username;
+    return this.authService.getUser().imePrezime;
   }
   handleCloseAddReservationModal() {
     this.addReservation.nativeElement.style.display = 'none';
@@ -166,12 +168,45 @@ export class AddReservationComponent implements OnInit {
   }
 
   showOdjaviButton(): boolean {
-    if (this.reservation.id != 0 && this.authService.isAdmin()) return true;
+    if (
+      this.reservation.id != 0 &&
+      this.authService.isAdmin() &&
+      this.reservation.statusRezervacije?.id != 3
+    )
+      return true;
     else if (
       this.reservation.id != 0 &&
       this.authService.getUser().id == this.reservation.user?.id
     )
       return true;
     else return false;
+  }
+  showPrihvatiButton(): boolean {
+    if (
+      this.reservation.statusRezervacije?.status == 'Na cekanju' &&
+      this.authService.isAdmin()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  handleAcceptReservation() {
+    this.reservationService
+      .acceptReservationRequest(this.reservation)
+      .subscribe(
+        (res) => {
+          if (res.status == 200) {
+            this.toast.success({
+              detail: 'Success',
+              summary: 'Rezervacija je prihvacena!',
+              duration: 3000,
+            });
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }

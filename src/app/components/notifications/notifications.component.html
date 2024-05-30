@@ -5,6 +5,7 @@
       <app-notification-card
         [reservationNotification]="item"
         (notificationEmitter)="notificationEmitter()"
+        (viewNotification)="viewNotification($event)"
       ></app-notification-card>
     </div>
   </div>
@@ -19,4 +20,27 @@
       ></app-notification-user-card>
     </div>
   </div>
+</div>
+
+<div class="reservation-wrapper" style="width: 95vw" *ngIf="showReservations">
+  <button class="close-button" (click)="handleCloseReservations()">X</button>
+
+  <app-reservations
+    style="
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      margin: auto auto;
+      overflow: scroll;
+      scrollbar-width: none;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 100px;
+      text-align: center;
+      box-shadow: rgba(28, 28, 28, 0.6) 0 0 1000px 1000px;
+      background-color: rgba(28, 28, 28, 0.6);
+    "
+    [dayNumber]="viewReservation?.vremeDatum?.getDate()!"
+  ></app-reservations>
 </div>

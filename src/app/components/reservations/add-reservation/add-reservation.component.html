@@ -21,7 +21,7 @@
       <label>Datum i vreme: *</label>
       <select name="vremeDatum" [(ngModel)]="reservation.vremeDatum">
         <option *ngFor="let item of hours; index as i" [ngValue]="item">
-          {{ item.toString().slice(16, 24) }}
+          {{ item.toString().slice(0, 11) }}{{ item.toString().slice(16, 24) }}
         </option>
       </select>
     </div>
@@ -48,9 +48,10 @@
         class="button"
         (click)="handleUpdateReservation()"
         *ngIf="
-          (authService.isAdmin() && this.reservation.id != 0) ||
-          (this.reservation.id != 0 &&
-            authService.getUser().id == this.reservation.user?.id)
+          ((authService.isAdmin() && this.reservation.id != 0) ||
+            (this.reservation.id != 0 &&
+              authService.getUser().id == this.reservation.user?.id)) &&
+          this.reservation.statusRezervacije?.id != 3
         "
       >
         Izmeni
@@ -62,6 +63,13 @@
         *ngIf="showOdjaviButton()"
       >
         Odjavi
+      </button>
+      <button
+        class="button"
+        (click)="handleAcceptReservation()"
+        *ngIf="showPrihvatiButton()"
+      >
+        Prihvati
       </button>
     </div>
   </form>

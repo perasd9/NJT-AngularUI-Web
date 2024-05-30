@@ -1,40 +1,55 @@
-<table class="reservation-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th *ngFor="let hour of hours">{{ hour.getHours() }}:00</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let hall of halls; let i = index">
-      <th>{{ hall.naziv }}</th>
-      <td
-        *ngFor="let hour of hours"
-        [ngClass]="{ reserved: isReserved(hall, hour) }"
-      >
-        {{ getReservationData(hall, hour) }}
-        <button
-          class="button"
-          *ngIf="isReserved(hall, hour)"
-          style="width: 50%; border-radius: 10px; height: 30px; font-size: 15px"
-          (click)="showAddReservationModal(getReservation(hall, hour))"
+<div class="table-wrapper">
+  <table class="reservation-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let hour of hours" class="sticky">
+          {{ hour.getHours() }}:00
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hall of halls; let i = index">
+        <th class="sticky">{{ hall.naziv }}</th>
+        <td
+          *ngFor="let hour of hours; index as j"
+          [ngClass]="{
+            reserved: isReserved(hall, hour),
+            onHold: isOnHold(hall, hour)
+          }"
+          (click)="showAddReservationModal(getReservation(hall, hour), false)"
         >
-          Vise...
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          {{ getReservationData(hall, hour) }}
+          <button
+            class="button"
+            *ngIf="isReserved(hall, hour) || isOnHold(hall, hour)"
+            style="
+              width: 50%;
+              border-radius: 10px;
+              height: 30px;
+              font-size: 15px;
+            "
+            (click)="showAddReservationModal(getReservation(hall, hour), true)"
+          >
+            Vise...
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<button
-  class="button fixed-button"
-  (click)="showAddReservationModal(getReservation(undefined, hours[0]))"
->
-  Rezervisi
-</button>
+  <button
+    class="button fixed-button"
+    (click)="
+      showAddReservationModal(getReservation(undefined, hours[0]), false)
+    "
+  >
+    Rezervisi
+  </button>
 
-<app-add-reservation
-  #addReservationComponent
-  [hours]="this.hours"
-  (reservationUpated)="reservationUpdated()"
-></app-add-reservation>
+  <app-add-reservation
+    #addReservationComponent
+    [hours]="this.hours"
+    (reservationUpated)="reservationUpdated()"
+  ></app-add-reservation>
+</div>

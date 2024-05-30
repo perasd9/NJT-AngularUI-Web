@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+  viewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Reservation } from '../../model/Reservation';
 import { Hall } from '../../model/Hall';
@@ -10,6 +18,7 @@ import { AuthService } from '../../guards/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { NotificationUserCardComponent } from './notification-user-card/notification-user-card.component';
 import { NotificationService } from './service/notification.service';
+import { ReservationsComponent } from '../reservations/reservations.component';
 
 @Component({
   selector: 'app-notifications',
@@ -18,6 +27,7 @@ import { NotificationService } from './service/notification.service';
     NotificationCardComponent,
     CommonModule,
     NotificationUserCardComponent,
+    ReservationsComponent,
   ],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.scss',
@@ -25,6 +35,8 @@ import { NotificationService } from './service/notification.service';
 export class NotificationsComponent implements OnInit {
   reservations: Reservation[] = [];
   users: User[] = [];
+  showReservations: boolean = false;
+  viewReservation?: Reservation;
 
   constructor(
     private router: Router,
@@ -60,5 +72,13 @@ export class NotificationsComponent implements OnInit {
   notificationEmitter() {
     this.ngOnInit();
     this.notificationService.decrementNotificationCount();
+  }
+
+  viewNotification(event: Reservation) {
+    this.viewReservation = event;
+    this.showReservations = !this.showReservations;
+  }
+  handleCloseReservations() {
+    this.showReservations = !this.showReservations;
   }
 }

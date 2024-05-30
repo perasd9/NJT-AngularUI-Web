@@ -7,3 +7,16 @@
   scrollbar-width: none;
   margin: 2rem auto;
 }
+
+.close-button {
+  position: absolute;
+  top: -5px;
+  right: -40px;
+  font-family: "Times New Roman", Times, sans-serif;
+  border: none;
+  background-color: #623450;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 10;
+}

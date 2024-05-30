@@ -4,6 +4,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  QueryList,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -27,11 +28,14 @@ export class ReservationsComponent implements OnInit, OnChanges {
   reservations: Reservation[] = [];
   halls: Hall[] = [];
 
-  @Input({ required: true })
+  @Input({ required: false })
+  dayNumber: number = 1;
+
+  @Input({ required: false })
   selectedDate: Date = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
-    1
+    this.dayNumber
   );
 
   @ViewChild('addReservationComponent')
@@ -55,6 +59,12 @@ export class ReservationsComponent implements OnInit, OnChanges {
         (err) => {
           console.log(err);
         }
+      );
+    } else if (changes['dayNumber']) {
+      this.selectedDate = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        this.dayNumber
       );
     }
   }
@@ -81,8 +91,8 @@ export class ReservationsComponent implements OnInit, OnChanges {
 
   private generateTimeSlots(date: Date): Date[] {
     const timeSlots: Date[] = [];
-    const startHour = 8;
-    const endHour = 20;
+    const startHour = 0;
+    const endHour = 23;
 
     date.setHours(0, 0, 0, 0);
 
@@ -107,6 +117,18 @@ export class ReservationsComponent implements OnInit, OnChanges {
     return reservation !== undefined;
   }
 
+  isOnHold(hall: Hall, hour: Date): boolean {
+    this.selectedDate.setHours(hour.getHours());
+
+    const reservation = this.reservations.find(
+      (r) =>
+        r.sale?.find((sala) => sala.id == hall.id) &&
+        r.vremeDatum?.getTime() === this.selectedDate.getTime() &&
+        r.statusRezervacije?.id == 3
+    );
+    return reservation !== undefined;
+  }
+
   getReservationData(hall: Hall, hour: Date): string {
     this.selectedDate.setHours(hour.getHours());
 
@@ -115,7 +137,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
         r.sale?.find((sala) => sala.id == hall.id) &&
         r.vremeDatum?.getTime() === this.selectedDate.getTime()
     );
-    return reservation ? reservation.user?.username?.toString()! : '';
+    return reservation ? reservation.user?.imePrezime?.toString()! : '';
   }
 
   getReservation(hall: Hall | undefined, hour: Date): Reservation {
@@ -150,16 +172,22 @@ export class ReservationsComponent implements OnInit, OnChanges {
           0,
           new User(0, '', '', '', '', false, false, 'user', 'USER'),
           0,
-          this.hours[11]
+          undefined
         );
   }
 
-  showAddReservationModal(reservation: Reservation) {
-    if (reservation) {
-      this.addReservationComponent.reservation = reservation;
+  showAddReservationModal(reservation: Reservation, active: boolean) {
+    if (active) {
+      if (reservation) {
+        this.addReservationComponent.reservation = reservation;
+      }
+    } else {
+      if (reservation) {
+        this.addReservationComponent.reservation = reservation;
+      }
+      this.addReservationComponent.addReservation.nativeElement.style.display =
+        'block';
     }
-    this.addReservationComponent.addReservation.nativeElement.style.display =
-      'block';
   }
 
   reservationUpdated() {

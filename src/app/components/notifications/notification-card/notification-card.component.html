@@ -15,16 +15,24 @@
       <span style="color: #ce589f">Datum</span> <br />{{
         reservationNotification.vremeDatum?.toLocaleDateString()
       }}
-      {{ reservationNotification.vremeDatum?.toISOString()?.slice(11, 16) }}
+      {{ reservationNotification.vremeDatum?.getHours() }}:00
     </h2>
   </div>
   <div class="actions">
-    <button
+    <!-- <button
       class="button"
       style="background-color: #60c3ad"
       (click)="handlePrihvatiRezervaciju()"
     >
       Prihvati
+    </button> -->
+
+    <button
+      class="button"
+      style="background-color: #60c3ad"
+      (click)="handleViewReservation()"
+    >
+      Pogledaj
     </button>
     <button
       class="button"
