@@ -1,5 +1,5 @@
 <div class="top-calendar">
-  <div style="display: flex; width: 90%; gap: 2rem">
+  <div style="display: flex; width: 85%; gap: 2rem">
     <img
       src="./assets/arrowLeft.png"
       alt=""
@@ -25,7 +25,20 @@
       (click)="scrollRight()"
     />
   </div>
-  <div class="choose-date">
-    <img src="./assets/choseDateIcon.png" alt="" style="cursor: pointer" />
+  <div class="choose-date" style="width: 12%">
+    <!-- <img src="./assets/choseDateIcon.png" alt="" style="cursor: pointer" /> -->
+    <input
+      type="date"
+      (change)="onChangeDate($event)"
+      [(ngModel)]="chooseDateString"
+      style="
+        height: 40px;
+        width: 100%;
+        font-size: 20px;
+        border-radius: 12px;
+        border: none;
+      "
+      onkeydown="return false"
+    />
   </div>
 </div>

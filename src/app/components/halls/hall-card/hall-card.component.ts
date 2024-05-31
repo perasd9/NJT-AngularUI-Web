@@ -32,6 +32,8 @@ export class HallCardComponent {
     });
   }
   deleteHall() {
+    console.log(this.hall.id);
+
     this.hallService.deleteHall(this.hall.id).subscribe(
       (res) => {
         if (res.status == 200) {

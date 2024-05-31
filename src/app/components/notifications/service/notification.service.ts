@@ -13,9 +13,7 @@ export class NotificationService {
   private notificationSubject = new BehaviorSubject<string>('');
   public notifications = this.notificationSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.connect();
-  }
+  constructor(private http: HttpClient) {}
 
   connect() {
     const socket = new SockJS(

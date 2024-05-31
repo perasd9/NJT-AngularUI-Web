@@ -4,11 +4,28 @@
     <input type="text" placeholder="..." [(ngModel)]="searchName" />
     <button class="button" (click)="handleSearchHalls()">Pretrazi</button>
   </div>
+  @defer(on viewport){
   <app-hall-card
     *ngFor="let item of halls"
     [hall]="item"
     (hallDeleted)="onHallUpdated($event)"
   />
+  } @placeholder{
+  <div class="lds-spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  }
 </div>
 
 <button class="button fixed-button" (click)="navigateToAddHall()">Dodaj</button>

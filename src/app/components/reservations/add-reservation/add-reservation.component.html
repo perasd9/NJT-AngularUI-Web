@@ -58,7 +58,7 @@
       </button>
       <button
         class="button"
-        (click)="handleCloseReservation()"
+        (click)="openCancelModal()"
         style="background-color: #f34d45; color: #fff"
         *ngIf="showOdjaviButton()"
       >
@@ -71,6 +71,26 @@
       >
         Prihvati
       </button>
+    </div>
+  </form>
+</div>
+
+<div class="custom-modal" #cancelReservationModal style="display: none">
+  <form action="" id="cancel-form">
+    <h2>Odjava rezervacije</h2>
+    <div>
+      <label for="cancelReason">Razlog odjave: *</label>
+      <input
+        type="text"
+        id="cancelReason"
+        [(ngModel)]="reservation.razlogOdjave"
+        name="cancelReason"
+        required
+      />
+    </div>
+    <div>
+      <button class="button" (click)="confirmCancellation()">Odjavi</button>
+      <button class="button" (click)="closeCancelModal()">Zatvori</button>
     </div>
   </form>
 </div>

@@ -66,6 +66,8 @@ export class ReservationsComponent implements OnInit, OnChanges {
         new Date().getMonth(),
         this.dayNumber
       );
+
+      this.hours = this.generateTimeSlots(this.selectedDate);
     }
   }
 
@@ -172,7 +174,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
           0,
           new User(0, '', '', '', '', false, false, 'user', 'USER'),
           0,
-          undefined
+          this.selectedDate
         );
   }
 

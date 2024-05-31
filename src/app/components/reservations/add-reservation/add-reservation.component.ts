@@ -209,4 +209,18 @@ export class AddReservationComponent implements OnInit {
         }
       );
   }
+
+  @ViewChild('cancelReservationModal') cancelReservationModal!: ElementRef;
+  openCancelModal() {
+    this.cancelReservationModal.nativeElement.style.display = 'block';
+  }
+
+  closeCancelModal() {
+    this.cancelReservationModal.nativeElement.style.display = 'none';
+  }
+
+  confirmCancellation() {
+    this.handleCloseReservation();
+    this.closeCancelModal();
+  }
 }

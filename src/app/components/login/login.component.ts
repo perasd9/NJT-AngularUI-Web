@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('jwt', res.body.jwt);
           this.authService.setUser(res.body.user);
 
-          this.router.navigate(['/profile-info']);
+          this.router.navigate(['']);
 
           this.toast.success({
             detail: 'Success',
