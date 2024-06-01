@@ -10,8 +10,11 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
   getReservations(date: Date): Observable<Reservation[]> {
-    date.setHours(date.getHours() + 2);
-    const formattedDate = `${date.toISOString().slice(0, 10)} ${date
+    let tempDate: Date = new Date(date);
+
+    tempDate.setHours(date.getHours() + 2);
+
+    const formattedDate = `${tempDate.toISOString().slice(0, 10)} ${tempDate
       .toISOString()
       .slice(11, 16)}`;
 
@@ -67,7 +70,12 @@ export class ReservationService {
   }
 
   sendReservationRequest(reservation: Reservation) {
-    reservation.vremeDatum?.setHours(reservation.vremeDatum.getHours() + 2);
+    let tempDate: Date | undefined = undefined;
+    if (reservation.vremeDatum != undefined) {
+      tempDate = new Date(reservation.vremeDatum!.toString());
+
+      tempDate.setHours(reservation.vremeDatum!.getHours() + 2);
+    }
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/kreiraj`,
@@ -83,9 +91,7 @@ export class ReservationService {
             id: reservation.user?.id,
             type: 'User',
           },
-          vremeDatum: `${reservation.vremeDatum
-            ?.toISOString()
-            .slice(0, 10)} ${reservation.vremeDatum
+          vremeDatum: `${tempDate?.toISOString().slice(0, 10)} ${tempDate
             ?.toISOString()
             .slice(11, 16)}`,
         },

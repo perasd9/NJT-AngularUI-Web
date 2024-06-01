@@ -6,6 +6,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { AuthService } from '../../guards/auth.service';
 import { RegisterComponent } from '../register/register.component';
+import { NotificationService } from '../notifications/service/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private toast: NgToastService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {
     if (localStorage.getItem('user') != null) {
       router.navigateByUrl(
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('jwt', res.body.jwt);
           this.authService.setUser(res.body.user);
 
+          this.notificationService.connect();
           this.router.navigate(['']);
 
           this.toast.success({

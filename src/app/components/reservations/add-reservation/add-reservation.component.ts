@@ -36,6 +36,8 @@ export class AddReservationComponent implements OnInit {
 
   @Output()
   reservationUpated: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  refreshReservationsTable: EventEmitter<any> = new EventEmitter<any>();
 
   @Input({ required: true })
   hours!: Date[];
@@ -88,6 +90,7 @@ export class AddReservationComponent implements OnInit {
     this.reservationService.sendReservationRequest(this.reservation).subscribe(
       (res) => {
         if (res.status == 200) {
+          this.refreshReservationsTable.emit();
           this.addReservation.nativeElement.style.display = 'none';
 
           if (JSON.parse(localStorage.getItem('user')!)?.role == 'USER') {
@@ -197,6 +200,9 @@ export class AddReservationComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.status == 200) {
+            this.reservationUpated.emit();
+            this.addReservation.nativeElement.style.display = 'none';
+
             this.toast.success({
               detail: 'Success',
               summary: 'Rezervacija je prihvacena!',

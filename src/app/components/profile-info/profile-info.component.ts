@@ -6,6 +6,7 @@ import { User } from '../../model/User';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { NotificationService } from '../notifications/service/notification.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -22,7 +23,8 @@ export class ProfileInfoComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private profileService: ProfileService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class ProfileInfoComponent implements OnInit {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
+    this.notificationService.disconnect();
   }
   handleChangePassword() {
     this.profileService

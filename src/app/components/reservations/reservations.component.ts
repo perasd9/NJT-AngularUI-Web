@@ -195,4 +195,14 @@ export class ReservationsComponent implements OnInit, OnChanges {
   reservationUpdated() {
     this.ngOnInit();
   }
+  refreshReservationsTable() {
+    this.reservationService.getReservations(new Date(2024, 5, 1, 2)).subscribe(
+      (res) => {
+        this.reservations = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

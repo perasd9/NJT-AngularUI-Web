@@ -80,5 +80,6 @@ export class NotificationsComponent implements OnInit {
   }
   handleCloseReservations() {
     this.showReservations = !this.showReservations;
+    this.ngOnInit();
   }
 }

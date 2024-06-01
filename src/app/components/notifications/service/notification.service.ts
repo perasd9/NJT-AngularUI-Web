@@ -4,6 +4,7 @@ import { Client, StompHeaders } from '@stomp/stompjs';
 import { BehaviorSubject, catchError } from 'rxjs';
 import SockJS from 'sockjs-client';
 import { User } from '../../../model/User';
+import { AuthService } from '../../../guards/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,9 @@ export class NotificationService {
   private notificationSubject = new BehaviorSubject<string>('');
   public notifications = this.notificationSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {
+    if (this.authService.isLoggedIn()) this.connect();
+  }
 
   connect() {
     const socket = new SockJS(

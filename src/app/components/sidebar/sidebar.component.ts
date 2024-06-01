@@ -23,25 +23,27 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.reservationService.getReservationsRequests().subscribe((res) => {
-      this.notificationCount += res.length;
-    });
-    this.authService.getUsers().subscribe((res) => {
-      this.notificationCount += res.body!.length;
-    });
+    if (this.authService.isAdmin()) {
+      this.reservationService.getReservationsRequests().subscribe((res) => {
+        this.notificationCount += res.length;
+      });
+      this.authService.getUsers().subscribe((res) => {
+        this.notificationCount += res.body!.length;
+      });
 
-    this.notificationService.notifications.subscribe((message) => {
-      if (message == 'Obavestenje poslato!') {
-        this.notificationCount++;
-        this.toast.info({
-          detail: 'Info',
-          summary: 'Stiglo je novo obavestenje!',
-          duration: 4000,
-        });
-      } else if (message == ' ') {
-        this.notificationCount--;
-      }
-    });
+      this.notificationService.notifications.subscribe((message) => {
+        if (message == 'Novo obavestenje!') {
+          this.notificationCount++;
+          this.toast.info({
+            detail: 'Info',
+            summary: 'Stiglo je novo obavestenje!',
+            duration: 4000,
+          });
+        } else if (message == ' ') {
+          this.notificationCount--;
+        }
+      });
+    }
   }
 
   notificationCount: number = 0;
