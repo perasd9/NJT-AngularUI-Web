@@ -1,10 +1,12 @@
 import { Hall } from './Hall';
+import { Purpose } from './Purpose';
 import { ReservationStatus } from './ReservationStatus';
 import { User } from './User';
 
 export class Reservation {
   id: number;
-  svrha?: string;
+  svrha: Purpose;
+  svrhaId?: number;
   razlogOdjave?: string;
   sale?: Hall[];
   statusRezervacije?: ReservationStatus;
@@ -15,7 +17,8 @@ export class Reservation {
 
   constructor(
     id: number,
-    svrha?: string,
+    svrha: Purpose,
+    svrhaId?: number,
     razlogOdjave?: string,
     sale?: Hall[],
     salaId?: number,
@@ -27,6 +30,7 @@ export class Reservation {
   ) {
     this.id = id;
     this.sale = sale;
+    this.svrhaId = svrhaId;
     this.statusRezervacije = statusRezervacije;
     this.statusRezervacijeId = statusRezervacijeId;
     this.user = user;

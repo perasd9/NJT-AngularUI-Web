@@ -89,7 +89,13 @@ export class AddHallComponent implements OnInit {
 
           this.toast.success({
             detail: 'Success',
-            summary: 'Sala je uspesno kreirana!',
+            summary: res.body.message,
+            duration: 3000,
+          });
+        } else {
+          this.toast.error({
+            detail: 'Error',
+            summary: res.body.message,
             duration: 3000,
           });
         }
@@ -112,6 +118,12 @@ export class AddHallComponent implements OnInit {
           this.toast.success({
             detail: 'Success',
             summary: 'Sala je uspesno izmenjena!',
+            duration: 3000,
+          });
+        } else {
+          this.toast.error({
+            detail: 'Error',
+            summary: 'Sala ne moze biti izmenjena',
             duration: 3000,
           });
         }

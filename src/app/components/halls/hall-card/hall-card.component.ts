@@ -41,7 +41,13 @@ export class HallCardComponent {
 
           this.toast.success({
             detail: 'Success',
-            summary: 'Sala je uspesno obrisana!',
+            summary: res.body.message,
+            duration: 3000,
+          });
+        } else {
+          this.toast.error({
+            detail: 'Error',
+            summary: res.body.message,
             duration: 3000,
           });
         }

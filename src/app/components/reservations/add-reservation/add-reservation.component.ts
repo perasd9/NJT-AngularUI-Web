@@ -20,6 +20,7 @@ import { ReservationStatus } from '../../../model/ReservationStatus';
 import { User } from '../../../model/User';
 import { AuthService } from '../../../guards/auth.service';
 import { NotificationService } from '../../notifications/service/notification.service';
+import { Purpose } from '../../../model/Purpose';
 
 @Component({
   selector: 'app-add-reservation',
@@ -33,6 +34,7 @@ export class AddReservationComponent implements OnInit {
   addReservation!: ElementRef;
 
   halls!: Hall[];
+  purposes!: Purpose[];
 
   @Output()
   reservationUpated: EventEmitter<any> = new EventEmitter<any>();
@@ -45,7 +47,8 @@ export class AddReservationComponent implements OnInit {
   @Input({ required: false })
   reservation: Reservation = new Reservation(
     0,
-    '',
+    new Purpose(1),
+    0,
     '',
     undefined,
     0,
@@ -76,6 +79,15 @@ export class AddReservationComponent implements OnInit {
         console.log(err);
       }
     );
+    this.reservationService.getPurposes().subscribe(
+      (res) => {
+        this.purposes = res.body!;
+        this.reservation.svrha = this.purposes[0];
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getUserFromAuth() {
@@ -99,13 +111,13 @@ export class AddReservationComponent implements OnInit {
 
           this.toast.success({
             detail: 'Success',
-            summary: 'Zahtev za rezervaciju je uspesno poslat!',
+            summary: res.body.message,
             duration: 1500,
           });
-        } else if (res.status == 400) {
+        } else if (res.status == 500) {
           this.toast.error({
             detail: 'Success',
-            summary: 'Zahtev za rezervaciju ne moze biti poslat!',
+            summary: res.body.message,
             duration: 1500,
           });
         }
@@ -126,13 +138,13 @@ export class AddReservationComponent implements OnInit {
 
           this.toast.success({
             detail: 'Success',
-            summary: 'Rezervacija je uspesno izmenjena i zahtev je poslat!',
+            summary: res.body.message,
             duration: 1500,
           });
-        } else if (res.status == 400) {
+        } else if (res.status == 500) {
           this.toast.error({
             detail: 'Error',
-            summary: 'Izmena rezervacije nije moguca!',
+            summary: res.body.message,
             duration: 1500,
           });
         }
@@ -153,13 +165,13 @@ export class AddReservationComponent implements OnInit {
 
           this.toast.success({
             detail: 'Success',
-            summary: 'Rezervacija je uspesno izmenjena i zahtev je poslat!',
+            summary: res.body.message,
             duration: 1500,
           });
-        } else if (res.status == 400) {
+        } else if (res.status == 500) {
           this.toast.error({
             detail: 'Error',
-            summary: 'Izmena rezervacije nije moguca!',
+            summary: res.body.message,
             duration: 1500,
           });
         }
@@ -201,11 +213,12 @@ export class AddReservationComponent implements OnInit {
         (res) => {
           if (res.status == 200) {
             this.reservationUpated.emit();
+            this.notificationService.decrementNotificationCount();
             this.addReservation.nativeElement.style.display = 'none';
 
             this.toast.success({
               detail: 'Success',
-              summary: 'Rezervacija je prihvacena!',
+              summary: res.body.message,
               duration: 3000,
             });
           }

@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
 import { ReservationStatus } from '../../model/ReservationStatus';
 import { User } from '../../model/User';
+import { Purpose } from '../../model/Purpose';
 
 @Component({
   selector: 'app-reservations',
@@ -157,6 +158,11 @@ export class ReservationsComponent implements OnInit, OnChanges {
           hall.id == reservation.sale?.find((sala) => sala.id == hall.id)?.id
         );
       });
+      reservation.svrha = this.addReservationComponent.purposes.find(
+        (purpose) => {
+          return purpose.id == reservation.svrha.id;
+        }
+      )!;
       reservation.vremeDatum = this.hours.find((hour) => {
         return hour.getTime() === reservation.vremeDatum?.getTime();
       });
@@ -166,7 +172,8 @@ export class ReservationsComponent implements OnInit, OnChanges {
       ? reservation
       : new Reservation(
           0,
-          '',
+          this.addReservationComponent.purposes[0],
+          0,
           '',
           this.addReservationComponent.halls,
           0,
@@ -174,7 +181,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
           0,
           new User(0, '', '', '', '', false, false, 'user', 'USER'),
           0,
-          this.selectedDate
+          this.hours[0]
         );
   }
 
@@ -196,7 +203,7 @@ export class ReservationsComponent implements OnInit, OnChanges {
     this.ngOnInit();
   }
   refreshReservationsTable() {
-    this.reservationService.getReservations(new Date(2024, 5, 1, 2)).subscribe(
+    this.reservationService.getReservations(this.selectedDate).subscribe(
       (res) => {
         this.reservations = res;
       },

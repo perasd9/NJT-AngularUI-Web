@@ -28,12 +28,21 @@
 
     <div>
       <label>Svrha: *</label>
-      <input type="text" name="svrha" [(ngModel)]="reservation.svrha" />
+      <select name="svrha" [(ngModel)]="reservation.svrha">
+        <option *ngFor="let item of purposes; index as i" [ngValue]="item">
+          {{ item.predmet || item.naziv }}
+        </option>
+      </select>
     </div>
 
     <div>
       <label>User: *</label>
-      <input type="text" name="datum" disabled [value]="getUserFromAuth()" />
+      <input
+        type="text"
+        name="datum"
+        disabled
+        [value]="reservation.user?.imePrezime || getUserFromAuth()"
+      />
     </div>
 
     <div>

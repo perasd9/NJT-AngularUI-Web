@@ -42,6 +42,20 @@ export class ReservationService {
         })
       );
   }
+  getPurposes() {
+    return this.http
+      .get<Reservation[]>(`http://localhost:8080/api/v1/svrha`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        }),
+        observe: 'response',
+      })
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
 
   getReservationsRequests(): Observable<Reservation[]> {
     return this.http
@@ -76,6 +90,7 @@ export class ReservationService {
 
       tempDate.setHours(reservation.vremeDatum!.getHours() + 2);
     }
+    reservation.svrha.type = 'Ispit';
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/kreiraj`,
@@ -110,6 +125,7 @@ export class ReservationService {
   }
 
   acceptReservationRequest(reservation: Reservation) {
+    reservation.svrha.type = 'Ispit';
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/prihvati`,
@@ -146,6 +162,7 @@ export class ReservationService {
   }
 
   denyReservationRequest(reservation: Reservation) {
+    reservation.svrha.type = 'Ispit';
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/odbij`,
@@ -182,7 +199,13 @@ export class ReservationService {
   }
 
   updateReservation(reservation: Reservation) {
-    reservation.vremeDatum?.setHours(reservation.vremeDatum.getHours() + 2);
+    reservation.svrha.type = 'Ispit';
+    let tempDate: Date | undefined = undefined;
+    if (reservation.vremeDatum != undefined) {
+      tempDate = new Date(reservation.vremeDatum!.toString());
+
+      tempDate.setHours(reservation.vremeDatum!.getHours() + 2);
+    }
     return this.http
       .put<any>(
         `http://localhost:8080/api/v1/rezervacija`,
@@ -198,9 +221,7 @@ export class ReservationService {
             id: reservation.user?.id,
             type: 'User',
           },
-          vremeDatum: `${reservation.vremeDatum
-            ?.toISOString()
-            .slice(0, 10)} ${reservation.vremeDatum
+          vremeDatum: `${tempDate?.toISOString().slice(0, 10)} ${tempDate
             ?.toISOString()
             .slice(11, 16)}`,
         },
@@ -219,6 +240,7 @@ export class ReservationService {
   }
 
   closeReservation(reservation: Reservation) {
+    reservation.svrha.type = 'Ispit';
     return this.http
       .post<any>(
         `http://localhost:8080/api/v1/rezervacija/odjavi`,
